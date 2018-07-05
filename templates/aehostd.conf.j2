@@ -1,0 +1,34 @@
+# /etc/aehostd.conf
+# configuration for AE-DIR's custom NSS/PAM host demon
+[aehostd]
+
+# The numeric user and group IDs to run as
+uid = nslcd
+gid = nslcd
+
+# The location at which the LDAP server(s) should be reachable.
+pref_uri = {{ ldap_uris|join(' ') }}
+back_uri = {{ ldap_backup_uris|join(' ') }}
+
+# preferred short bind-DN form (relocatable)
+binddn = host={{ inventory_hostname }},{{ ldap_suffix }}
+# pathname of file containing password for the above binddn
+bindpwfile = {{ aehostd_pw_file }}
+
+# TLS options
+tls_cacertfile = {{ ldap_cacert_pathname }}
+
+# local password changes not allowed
+pam_passmod_deny_msg = Changing password on local system is not allowed for this user!
+
+# Check the SSH client's hostname in user entry
+pam_authz_search = {{ pam_authz_search }}
+
+# TTL of LDAP connection cache
+cache_ttl = 5.5
+
+# regex pattern of valid user and group names (see POSIX)
+#validnames = ^[a-zA-Z0-9._@$][a-zA-Z0-9._@$ \\~-]{0,98}[a-zA-Z0-9._@$~-]$
+
+# Python logging module log level
+loglevel = {{ aehostd_loglevel }}

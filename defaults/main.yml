@@ -1,0 +1,81 @@
+---
+# defaults file for roles/ae-dir-hostd
+
+# map real LSB id to another LSB id to be used during plays
+lsb_id_map:
+  openSUSE: "SUSE"
+
+# LSB id to be used during plays
+lsb_id: "{{ lsb_id_map.get(ansible_lsb.id,ansible_lsb.id) }}"
+
+# LDAPS URIs of primary AE-DIR servers (e.g. in same data center)
+ldap_uris: []
+
+# LDAPS URIs of backup AE-DIR servers (e.g. in other data center)
+ldap_backup_uris: []
+
+# search base to use
+ldap_suffix: "ou=ae-dir"
+
+# POSIX-UID number range served by LDAP server
+ldap_min_uid: 30000
+ldap_max_uid: 65000
+ldap_min_gid: 30000
+ldap_max_gid: 65000
+
+# TLS files
+ldap_cacert_filename: "cacert.pem"
+ldap_cacert_pathname: "/etc/ssl/{{ ldap_cacert_filename|basename }}"
+
+# nested dict of OS-specific vars
+os_vars:
+  Debian:
+    sshd_service_name: "ssh"
+    ssh_lib_dir: "/usr/lib/openssh"
+    sudo_ldap_conf: "/etc/sudo-ldap.conf"
+  SUSE:
+    sshd_service_name: "sshd"
+    ssh_lib_dir: "/usr/lib/ssh"
+    sudo_ldap_conf: "/etc/ldap.conf"
+
+# which modules to use in /etc/nsswitch.conf
+nsswitch_module: "ldap"
+nsswitch_passwd_module: "{{ nsswitch_module }}"
+nsswitch_group_module: "{{ nsswitch_module }}"
+nsswitch_sudoers_module: "{{ nsswitch_module }}"
+
+# flag whether to enable nscd
+nscd_enabled: False
+
+# Pathnames for (py)nslcd
+aehostd_conf_file: "/etc/aehostd.conf"
+aehostd_pw_file: "{{ aehostd_conf_file|dirname }}/aehostd.pw"
+
+# Python logging level to use
+aehostd_loglevel: "10"
+
+# pathname of nscd configuration file
+nscd_conf_file: "/etc/nscd.conf"
+
+# service name of SSH demon
+sshd_service_name: "{{ os_vars[lsb_id].sshd_service_name }}"
+
+# Filename of Jinja2 template file used for generating sshd_config
+sshd_config_template: "sshd_config.j2"
+
+# ListenAddress values
+sshd_listen_addresses: []
+
+# File name of emergency authorized keys for user root
+ssh_emergency_root_keys: "ssh_emergency_root_keys"
+
+# where to find the system-specific Jinja2 templates
+# for creating PAM config files /etc/pam.d/common-*
+pam_template_dir: "{{ lsb_id }}"
+
+# LDAP search filter for PAM authorization
+#-----------------------------------------
+# note that AE-DIR already does this implicit via visibility of aeUser entries
+
+# allow only active users with explicit login rights in AE-DIR
+pam_authz_search: "(&(uid={username})(|(pwdChangedTime=*)(userCertificate=*)(sshPublicKey=*)))"

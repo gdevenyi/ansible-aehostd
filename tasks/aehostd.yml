@@ -1,0 +1,72 @@
+---
+
+- name: "Install packages on {{ lsb_id }}"
+  include_tasks: "{{ lsb_id }}.yml"
+
+- name: "Ensure nslcd service is disabled and stopped"
+  service:
+    name: "nslcd"
+    state: stopped
+    enabled: no
+  notify:
+    - "restart ae-dir-hostd"
+
+- name: "CA certificate file {{ ldap_cacert_pathname }}"
+  copy:
+    src: "{{ ldap_cacert_filename }}"
+    dest: "{{ ldap_cacert_pathname }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+  - "restart ae-dir-hostd"
+
+- name: "Create {{ aehostd_conf_file }}"
+  template:
+    src: "{{ aehostd_conf_file|basename }}.j2"
+    dest: "{{ aehostd_conf_file }}"
+    owner: root
+    group: nslcd
+    mode: 0640
+  notify:
+    - "restart ae-dir-hostd"
+
+- name: "Set ownership/permissions of {{ aehostd_pw_file }}"
+  file:
+    path: "{{ aehostd_pw_file }}"
+    state: file
+    owner: root
+    group: nslcd
+    mode: 0660
+  notify:
+    - "restart ae-dir-hostd"
+
+- name: "Install systemd unit file"
+  template:
+    src: "ae-dir-hostd.service.j2"
+    dest: "/etc/systemd/system/ae-dir-hostd.service"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - "restart ae-dir-hostd"
+  when: ansible_service_mgr == "systemd"
+
+- name: "Make sure systemd unit files are reloaded"
+  systemd:
+    daemon_reload: yes
+  when: ansible_service_mgr == "systemd"
+
+- name: "Ensure aehostd service is running"
+  service:
+    name: "ae-dir-hostd"
+    state: started
+    enabled: yes
+
+- name: "Create sudo-ldap.conf"
+  template:
+    src: "sudo-ldap.conf.j2"
+    dest: "{{ os_vars[lsb_id].sudo_ldap_conf }}"
+    owner: root
+    group: root
+    mode: 0640

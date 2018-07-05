@@ -1,0 +1,92 @@
+---
+# tasks file for roles/ae-linux-login
+
+# SSH authorized keys
+#-----------------------------------------------------------------------
+
+- name: "Create directory for SSH authorized_keys and ignore files"
+  file:
+    path: "/etc/ssh/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+  - authorized_keys
+  - ignore_user_keys
+
+- name: "Create ignore file for SSH emergency root keys"
+  lineinfile:
+    state: present
+    create: yes
+    dest: /etc/ssh/ignore_user_keys/root
+    line: "root"
+    owner: root
+    group: root
+    mode: 0640
+
+- name: "Install SSH emergency root key(s)"
+  copy:
+    src: "{{ ssh_emergency_root_keys }}"
+    dest: "/etc/ssh/authorized_keys/root"
+    owner: root
+    group: root
+    mode: 0640
+
+# Install a NSS/PAM caching demon
+#-----------------------------------------------------------------------
+
+- name: "Install AE-DIR host demon for module {{ nsswitch_module }}"
+  include_tasks: "aehostd.yml"
+
+- name: "Install caching demon for module {{ nsswitch_module }}"
+  include_tasks: "nscd.yml"
+  when:
+    nscd_enabled == True
+
+# sshd, NSS and PAM configuration
+# these should be the last tasks!
+#-----------------------------------------------------------------------
+
+- name: "Install sshd_config based on {{ sshd_config_template }}"
+  template:
+    src: "{{ sshd_config_template }}"
+    dest: "/etc/ssh/sshd_config"
+    owner: root
+    group: root
+    mode: 0640
+    validate: "/usr/sbin/sshd -t -f %s"
+  notify: restart sshd
+
+- name: "ensure SSH demon is running"
+  service: name="{{ sshd_service_name }}" state=started enabled=yes
+
+- name: "Create nsswitch.conf"
+  template:
+    src: "nsswitch.conf.j2"
+    dest: "/etc/nsswitch.conf"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "Install PAM config files from {{ pam_template_dir }}/"
+  template:
+    src: "{{ pam_template_dir }}/{{ item }}.j2"
+    dest: "/etc/pam.d/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - common-account
+    - common-auth
+    - common-password
+    - common-session
+#    - common-session-noninteractive
+
+- name: "Install sudoers file"
+  template:
+    src: "sudoers.j2"
+    dest: "/etc/sudoers"
+    owner: root
+    group: root
+    mode: 0440

@@ -1,0 +1,46 @@
+#-----------------------------------------------------------------------
+# initiate:   systemctl enable ae-dir-hostd.service
+# start:      systemctl start ae-dir-hostd.service
+# get status: systemctl status ae-dir-hostd.service
+#
+# {{ ansible_managed }}
+#-----------------------------------------------------------------------
+
+[Unit]
+Description=AE-DIR OpenLDAP server
+Requires=network.target
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/var/run/nslcd/aehostd.pid
+User=nslcd
+Group=nslcd
+# force libldap to ignore ldap.conf
+Environment=LDAPNOINIT=1
+# let Python use random object identifier
+Environment=PYTHONHASHSEED=random
+# full optimization (especially __debug__ = False)
+Environment=PYTHONOPTIMIZE=2
+# avoid to accidentially write Python byte code
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/ae-dir-hostd -n
+# various hardening options
+MemoryDenyWriteExecute=yes
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+NoNewPrivileges=yes
+MountFlags=private
+SystemCallArchitectures=native
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+PrivateDevices=yes
+{% if apparmor_enabled %}
+#AppArmorProfile=ae-dir-hostd
+{% endif %}
+
+[Install]
+WantedBy=multi-user.target
