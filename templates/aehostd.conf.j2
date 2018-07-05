@@ -24,8 +24,8 @@ pam_passmod_deny_msg = Changing password on local system is not allowed for this
 # Check the SSH client's hostname in user entry
 pam_authz_search = {{ pam_authz_search }}
 
-# TTL of LDAP connection cache
-cache_ttl = 5.5
+# cache TTL for the synchronous LDAP searches
+cache_ttl = 5.0
 
 # regex pattern of valid user and group names (see POSIX)
 #validnames = ^[a-zA-Z0-9._@$][a-zA-Z0-9._@$ \\~-]{0,98}[a-zA-Z0-9._@$~-]$
