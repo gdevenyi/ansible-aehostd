@@ -3,10 +3,14 @@
 - name: "Install packages on {{ lsb_id }}"
   zypper:
     name: "{{ item }}"
-    state: present
+    state: latest
     disable_recommends: yes
     type: package
   with_items:
     - nss-pam-ldapd
+    - python-ldap0
+    - python-python-daemon
     - aehostd
     - sudo
+  notify:
+    - "restart ae-dir-hostd"

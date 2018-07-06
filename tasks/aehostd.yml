@@ -26,18 +26,34 @@
     src: "{{ aehostd_conf_file|basename }}.j2"
     dest: "{{ aehostd_conf_file }}"
     owner: root
-    group: nslcd
+    group: "{{ aehostd_gid }}"
     mode: 0640
   notify:
     - "restart ae-dir-hostd"
 
-- name: "Set ownership/permissions of {{ aehostd_pw_file }}"
+- name: "Create directories for storing persistent files"
   file:
-    path: "{{ aehostd_pw_file }}"
-    state: file
-    owner: root
-    group: nslcd
-    mode: 0660
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ aehostd_uid }}"
+    group: "{{ aehostd_gid }}"
+    mode: 0750
+  with_items:
+    - "{{ aehostd_pw_file|dirname }}"
+    - "{{ aehostd_db_dir }}"
+  notify:
+    - "restart ae-dir-hostd"
+
+- name: "Create run-time directories of files"
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ aehostd_uid }}"
+    group: "{{ aehostd_gid }}"
+    mode: 0755
+  with_items:
+    - "{{ aehostd_pid_file|dirname }}"
+    - "{{ aehostd_socket|dirname }}"
   notify:
     - "restart ae-dir-hostd"
 

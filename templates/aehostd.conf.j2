@@ -1,14 +1,21 @@
-# /etc/aehostd.conf
-# configuration for AE-DIR's custom NSS/PAM host demon
+# Configuration for AE-DIR's custom NSS/PAM host demon
+#
+# {{ ansible_managed }}
+
 [aehostd]
 
 # The numeric user and group IDs to run as
-uid = nslcd
-gid = nslcd
+uid = {{ aehostd_uid }}
+gid = {{ aehostd_gid }}
+
+# where process ID (PID) is stored
+pidfile = {{ aehostd_pid_file }}
+
+# pathname of Unix domain socket
+socketpath = {{ aehostd_socket }}
 
 # The location at which the LDAP server(s) should be reachable.
-pref_uri = {{ ldap_uris|join(' ') }}
-back_uri = {{ ldap_backup_uris|join(' ') }}
+uri = {{ ldap_uris|join(' ') }}
 
 # preferred short bind-DN form (relocatable)
 binddn = host={{ inventory_hostname }},{{ ldap_suffix }}
@@ -26,9 +33,3 @@ pam_authz_search = {{ pam_authz_search }}
 
 # cache TTL for the synchronous LDAP searches
 cache_ttl = 5.0
-
-# regex pattern of valid user and group names (see POSIX)
-#validnames = ^[a-zA-Z0-9._@$][a-zA-Z0-9._@$ \\~-]{0,98}[a-zA-Z0-9._@$~-]$
-
-# Python logging module log level
-loglevel = {{ aehostd_loglevel }}

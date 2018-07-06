@@ -44,15 +44,27 @@ nsswitch_passwd_module: "{{ nsswitch_module }}"
 nsswitch_group_module: "{{ nsswitch_module }}"
 nsswitch_sudoers_module: "{{ nsswitch_module }}"
 
-# flag whether to enable nscd
-nscd_enabled: False
+# process username and group for setuid
+aehostd_uid: "nslcd"
+aehostd_gid: "{{ aehostd_uid }}"
 
-# Pathnames for (py)nslcd
+# Python logging level
+aehostd_loglevel: "5"
+
+# Pathnames
 aehostd_conf_file: "/etc/aehostd.conf"
-aehostd_pw_file: "{{ aehostd_conf_file|dirname }}/aehostd.pw"
+aehostd_pw_file: "/var/lib/aehostd/aehostd.pw"
+aehostd_db_dir: "/var/lib/aehostd/db"
+aehostd_pid_file: "/var/run/{{ aehostd_uid }}/aehostd.pid"
+# path name of Unix domain socket for listening
+# (must match build-time constant NSLCD_SOCKET of NSS and PAM modules)
+aehostd_socket: "/var/run/nslcd/socket"
 
 # Python logging level to use
 aehostd_loglevel: "10"
+
+# flag whether to enable nscd
+nscd_enabled: False
 
 # pathname of nscd configuration file
 nscd_conf_file: "/etc/nscd.conf"

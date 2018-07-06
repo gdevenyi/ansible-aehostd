@@ -13,9 +13,9 @@ After=network.target
 
 [Service]
 Type=simple
-PIDFile=/var/run/nslcd/aehostd.pid
-User=nslcd
-Group=nslcd
+PIDFile={{ aehostd_pid_file }}
+User={{ aehostd_uid }}
+Group={{ aehostd_gid }}
 # force libldap to ignore ldap.conf
 Environment=LDAPNOINIT=1
 # let Python use random object identifier
@@ -24,7 +24,12 @@ Environment=PYTHONHASHSEED=random
 Environment=PYTHONOPTIMIZE=2
 # avoid to accidentially write Python byte code
 Environment=PYTHONDONTWRITEBYTECODE=1
-ExecStart=/usr/bin/ae-dir-hostd -n
+Environment=AE_LOGGING_CONFIG=/opt/ae-dir/etc/ae-logging.conf
+Environment=AE_LOGGER_QUALNAME=ae-dir-hostd
+#CapabilityBoundingSet=CAP_SETUID CAP_SETGID
+#AmbientCapabilities=CAP_SETUID CAP_SETGID
+ExecStart=/usr/bin/ae-dir-hostd --no-fork --config {{ aehostd_conf_file }} --log-level {{ aehostd_loglevel }}
+
 # various hardening options
 MemoryDenyWriteExecute=yes
 PrivateTmp=yes
