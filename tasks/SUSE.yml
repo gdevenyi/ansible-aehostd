@@ -13,4 +13,4 @@
     - aehostd
     - sudo
   notify:
-    - "restart ae-dir-hostd"
+    - "restart aehostd"

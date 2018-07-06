@@ -1,8 +1,8 @@
 ---
 # handlers file for roles/ae-dir-linux-client
 
-- name: "restart ae-dir-hostd"
-  service: name=ae-dir-hostd state=restarted
+- name: "restart aehostd"
+  service: name=aehostd state=restarted
 
 - name: "restart ssh"
   service: name="ssh" state=restarted

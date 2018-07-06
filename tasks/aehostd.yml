@@ -9,7 +9,7 @@
     state: stopped
     enabled: no
   notify:
-    - "restart ae-dir-hostd"
+    - "restart aehostd"
 
 - name: "CA certificate file {{ ldap_cacert_pathname }}"
   copy:
@@ -19,7 +19,7 @@
     group: root
     mode: 0644
   notify:
-  - "restart ae-dir-hostd"
+  - "restart aehostd"
 
 - name: "Create {{ aehostd_conf_file }}"
   template:
@@ -29,7 +29,7 @@
     group: "{{ aehostd_gid }}"
     mode: 0640
   notify:
-    - "restart ae-dir-hostd"
+    - "restart aehostd"
 
 - name: "Create directories for storing persistent files"
   file:
@@ -42,7 +42,7 @@
     - "{{ aehostd_pw_file|dirname }}"
     - "{{ aehostd_db_dir }}"
   notify:
-    - "restart ae-dir-hostd"
+    - "restart aehostd"
 
 - name: "Create run-time directories of files"
   file:
@@ -55,17 +55,17 @@
     - "{{ aehostd_pid_file|dirname }}"
     - "{{ aehostd_socket|dirname }}"
   notify:
-    - "restart ae-dir-hostd"
+    - "restart aehostd"
 
 - name: "Install systemd unit file"
   template:
-    src: "ae-dir-hostd.service.j2"
-    dest: "/etc/systemd/system/ae-dir-hostd.service"
+    src: "aehostd.service.j2"
+    dest: "/etc/systemd/system/aehostd.service"
     owner: root
     group: root
     mode: 0644
   notify:
-    - "restart ae-dir-hostd"
+    - "restart aehostd"
   when: ansible_service_mgr == "systemd"
 
 - name: "Make sure systemd unit files are reloaded"
@@ -75,7 +75,7 @@
 
 - name: "Ensure aehostd service is running"
   service:
-    name: "ae-dir-hostd"
+    name: "aehostd"
     state: started
     enabled: yes
 
