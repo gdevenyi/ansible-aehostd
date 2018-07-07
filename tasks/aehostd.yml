@@ -57,6 +57,17 @@
   notify:
     - "restart aehostd"
 
+- name: "Create {{ aehostd_pw_file }}"
+  copy:
+    content: "{{ ldap_host_password }}"
+    dest: "{{ aehostd_pw_file }}"
+    owner: "{{ aehostd_uid }}"
+    group: "{{ aehostd_gid }}"
+    mode: 0640
+  when: ldap_host_password is defined and ldap_host_password != ""
+  notify:
+    - "restart aehostd"
+
 - name: "Install systemd unit file"
   template:
     src: "aehostd.service.j2"

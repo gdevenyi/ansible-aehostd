@@ -8,7 +8,10 @@
     type: package
   with_items:
     - nss-pam-ldapd
+    - python-setuptools
     - python-ldap0
+    - python-aedir
+    - python-lockfile
     - python-python-daemon
     - aehostd
     - sudo

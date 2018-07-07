@@ -60,8 +60,7 @@ aehostd_pid_file: "/var/run/{{ aehostd_uid }}/aehostd.pid"
 # (must match build-time constant NSLCD_SOCKET of NSS and PAM modules)
 aehostd_socket: "/var/run/nslcd/socket"
 
-# Python logging level to use
-aehostd_loglevel: "10"
+aehostd_logging_config: ""
 
 # flag whether to enable nscd
 nscd_enabled: False
@@ -91,3 +90,14 @@ pam_template_dir: "{{ lsb_id }}"
 
 # allow only active users with explicit login rights in AE-DIR
 pam_authz_search: "(&(uid={username})(|(pwdChangedTime=*)(userCertificate=*)(sshPublicKey=*)))"
+
+#---------------------------------------------------------------------------
+# AppArmor parameters
+#---------------------------------------------------------------------------
+
+# set to True to enable mandatory access control with AppArmor
+#apparmor_enabled: "{{ ansible_apparmor.status == 'enabled' }}"
+apparmor_enabled: False
+
+# where custom AppArmor profiles are stored
+apparmor_profiles_dir: "/etc/apparmor.d"
