@@ -57,13 +57,14 @@
   notify:
     - "restart aehostd"
 
-- name: "Create {{ aehostd_pw_file }}"
+- name: "Set host password in {{ aehostd_pw_file }}"
   copy:
     content: "{{ ldap_host_password }}"
     dest: "{{ aehostd_pw_file }}"
     owner: "{{ aehostd_uid }}"
     group: "{{ aehostd_gid }}"
     mode: 0640
+  no_log: True
   when: ldap_host_password is defined and ldap_host_password != ""
   notify:
     - "restart aehostd"
