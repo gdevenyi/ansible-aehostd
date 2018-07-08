@@ -3,13 +3,20 @@
 - name: "Install packages on {{ lsb_id }}"
   include_tasks: "{{ lsb_id }}.yml"
 
-- name: "Ensure nslcd service is disabled and stopped"
-  service:
-    name: "nslcd"
-    state: stopped
-    enabled: no
-  notify:
-    - "restart aehostd"
+- name: "Create system group {{ aehostd_gid }}"
+  group:
+    state: present
+    name: "{{ aehostd_gid }}"
+    system: yes
+
+- name: "Create system user {{ aehostd_uid }}"
+  user:
+    state: present
+    name: "{{ aehostd_uid }}"
+    group: "{{ aehostd_gid }}"
+    home: "{{ aehostd_db_dir }}"
+    shell: "/sbin/nologin"
+    system: yes
 
 - name: "CA certificate file {{ ldap_cacert_pathname }}"
   copy:
@@ -90,11 +97,3 @@
     name: "aehostd"
     state: started
     enabled: yes
-
-- name: "Create sudo-ldap.conf"
-  template:
-    src: "sudo-ldap.conf.j2"
-    dest: "{{ os_vars[lsb_id].sudo_ldap_conf }}"
-    owner: root
-    group: root
-    mode: 0640

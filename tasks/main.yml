@@ -90,3 +90,11 @@
     owner: root
     group: root
     mode: 0440
+
+#- name: "Create sudo-ldap.conf"
+#  template:
+#    src: "sudo-ldap.conf.j2"
+#    dest: "{{ os_vars[lsb_id].sudo_ldap_conf }}"
+#    owner: root
+#    group: root
+#    mode: 0640
