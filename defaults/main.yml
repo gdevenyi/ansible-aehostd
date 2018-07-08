@@ -38,11 +38,13 @@ os_vars:
     ssh_lib_dir: "/usr/lib/ssh"
     sudo_ldap_conf: "/etc/ldap.conf"
 
-# which modules to use in /etc/nsswitch.conf
-nsswitch_module: "ldap"
+# which module name to use in /etc/nsswitch.conf
+nsswitch_module: "aedir"
 nsswitch_passwd_module: "{{ nsswitch_module }}"
 nsswitch_group_module: "{{ nsswitch_module }}"
-nsswitch_sudoers_module: "{{ nsswitch_module }}"
+nsswitch_sudoers_module: "ldap"
+# which module name to use in /etc/pam.d
+pam_module: "pam_{{ nsswitch_module }}.so"
 
 # process username and group for setuid
 aehostd_uid: "aehostd"
@@ -58,7 +60,7 @@ aehostd_db_dir: "/var/lib/aehostd/db"
 aehostd_pid_file: "/var/run/{{ aehostd_uid }}/aehostd.pid"
 # Path name of Unix domain socket for listening
 # (must match value of nss-pam-ldapd's build-time config option --with-nslcd-socket)
-aehostd_socket: "/var/run/aehostd/aehost.sock"
+aehostd_socket: "/var/run/aehostd/aehostd.sock"
 
 # flag whether to enable nscd
 nscd_enabled: False
