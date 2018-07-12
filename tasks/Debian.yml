@@ -11,5 +11,35 @@
   with_items:
     - libpam-ldapd
     - libnss-ldapd
-    - aehostd
     - sudo-ldap
+
+- name: "Prepare virtualenv /opt/ae-dir needed for PIP installation"
+  pip:
+    name:
+      - pip
+      - setuptools
+    state: latest
+    virtualenv: "/opt/ae-dir"
+    virtualenv_site_packages: no
+    virtualenv_python: python2.7
+
+- name: "Additional PIP packages in virtualenv /opt/ae-dir on {{ lsb_id }}"
+  pip:
+    name: "{{ item }}"
+    state: present
+    virtualenv: "/opt/ae-dir"
+    virtualenv_python: python2.7
+  with_items:
+    - pyasn1
+    - pyasn1_modules
+    - ldap0
+    - aedir
+    - aehostd
+  notify:
+    - restart aehostd
+
+- name: "Ensure nslcd service is disabled and stopped"
+  service:
+    name: "nslcd"
+    state: stopped
+    enabled: no

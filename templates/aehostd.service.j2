@@ -26,7 +26,7 @@ Environment=PYTHONOPTIMIZE=2
 Environment=PYTHONDONTWRITEBYTECODE=1
 CapabilityBoundingSet=
 AmbientCapabilities=
-ExecStart=/usr/sbin/aehostd --no-fork --config {{ aehostd_conf_file }} --log-level {{ aehostd_loglevel }}
+ExecStart={{ aehostd_exec }} --no-fork --config {{ aehostd_conf_file }} --log-level {{ aehostd_loglevel }}
 
 # various hardening options
 MemoryDenyWriteExecute=yes

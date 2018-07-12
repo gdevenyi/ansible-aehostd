@@ -54,6 +54,7 @@ aehostd_gid: "{{ aehostd_uid }}"
 aehostd_loglevel: "5"
 
 # Pathnames
+aehostd_exec: "/usr/sbin/aehostd"
 aehostd_conf_file: "/etc/aehostd.conf"
 aehostd_pw_file: "/var/lib/aehostd/aehostd.pw"
 aehostd_db_dir: "/var/lib/aehostd/db"

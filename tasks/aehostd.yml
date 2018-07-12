@@ -92,7 +92,7 @@
     daemon_reload: yes
   when: ansible_service_mgr == "systemd"
 
-- name: "Ensure aehostd service is running"
+- name: "Ensure aehostd service is enabled and running"
   service:
     name: "aehostd"
     state: started
