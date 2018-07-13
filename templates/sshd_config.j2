@@ -29,8 +29,14 @@ PermitRootLogin yes
 StrictModes yes
 
 PubkeyAuthentication yes
-#AuthorizedKeysFile	%h/.ssh/authorized_keys
-AuthorizedKeysFile /etc/ssh/authorized_keys/%u
+# find pre-installed SSH keys in fixed location for
+# - separately configured services
+# - root's emergency keys
+AuthorizedKeysFile {{ sshd_authorized_keys }}/%u
+# retrieve SSH keys loaded from AE-DIR from separate location
+# with different ownership
+AuthorizedKeysCommand /usr/bin/cat {{ aehostd_sshkeys_dir }}/%u
+AuthorizedKeysCommandUser {{ aehostd_uid }}
 
 # Don't read the user's ~/.rhosts and ~/.shosts files
 IgnoreRhosts yes
@@ -47,7 +53,7 @@ PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 
 # Change to no to disable tunnelled clear text passwords
-PasswordAuthentication yes
+PasswordAuthentication no
 
 # no Kerberos/GSSAPI
 KerberosAuthentication no
@@ -80,12 +86,6 @@ UsePAM yes
 
 AuthenticationMethods publickey password
 
-# options deprecated since OpenSSH 7.6p1
-#Privilege Separation is turned on for security
-UsePrivilegeSeparation yes
-# Lifetime and size of ephemeral version 1 server key
-KeyRegenerationInterval 3600
-ServerKeyBits 1024
-RSAAuthentication yes
-RhostsRSAAuthentication no
-#UseLogin no
+Match User aehost-init
+    # enable aehostd's password initialization via PAM
+    PasswordAuthentication yes

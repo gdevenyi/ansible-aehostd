@@ -4,26 +4,13 @@
 # SSH authorized keys
 #-----------------------------------------------------------------------
 
-- name: "Create directory for SSH authorized_keys and ignore files"
+- name: "Create directory for pre-installed SSH authorized keys {{ sshd_authorized_keys }}"
   file:
-    path: "/etc/ssh/{{ item }}"
+    path: "{{ sshd_authorized_keys }}"
     state: directory
     owner: root
     group: root
-    mode: 0755
-  with_items:
-  - authorized_keys
-  - ignore_user_keys
-
-- name: "Create ignore file for SSH emergency root keys"
-  lineinfile:
-    state: present
-    create: yes
-    dest: /etc/ssh/ignore_user_keys/root
-    line: "root"
-    owner: root
-    group: root
-    mode: 0640
+    mode: 0750
 
 - name: "Install SSH emergency root key(s)"
   copy:
@@ -90,11 +77,3 @@
     owner: root
     group: root
     mode: 0440
-
-#- name: "Create sudo-ldap.conf"
-#  template:
-#    src: "sudo-ldap.conf.j2"
-#    dest: "{{ os_vars[lsb_id].sudo_ldap_conf }}"
-#    owner: root
-#    group: root
-#    mode: 0640

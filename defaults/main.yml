@@ -53,15 +53,19 @@ aehostd_gid: "{{ aehostd_uid }}"
 # Python logging level
 aehostd_loglevel: "5"
 
-# Pathnames
+# Pathnames of aehostd's files and directories
 aehostd_exec: "/usr/sbin/aehostd"
 aehostd_conf_file: "/etc/aehostd.conf"
-aehostd_pw_file: "/var/lib/aehostd/aehostd.pw"
-aehostd_db_dir: "/var/lib/aehostd/db"
-aehostd_pid_file: "/var/run/{{ aehostd_uid }}/aehostd.pid"
+aehostd_lib_dir: "/var/lib/{{ aehostd_uid }}"
+aehostd_sshkeys_dir: "{{ aehostd_lib_dir }}/sshkeys"
+aehostd_db_dir: "{{ aehostd_lib_dir }}/db"
+aehostd_run_dir: "/var/run/{{ aehostd_uid }}"
+aehostd_pw_file: "{{ aehostd_lib_dir }}/aehostd.pw"
+aehostd_sudoers_file: "{{ aehostd_lib_dir }}/sudoers"
+aehostd_pid_file: "{{ aehostd_run_dir }}/aehostd.pid"
 # Path name of Unix domain socket for listening
 # (must match value of nss-pam-ldapd's build-time config option --with-nslcd-socket)
-aehostd_socket: "/var/run/aehostd/aehostd.sock"
+aehostd_socket: "{{ aehostd_run_dir }}/aehostd.sock"
 
 # flag whether to enable nscd
 nscd_enabled: False
@@ -74,6 +78,7 @@ sshd_service_name: "{{ os_vars[lsb_id].sshd_service_name }}"
 
 # Filename of Jinja2 template file used for generating sshd_config
 sshd_config_template: "sshd_config.j2"
+sshd_authorized_keys: "/etc/ssh/authorized_keys"
 
 # ListenAddress values
 sshd_listen_addresses: []

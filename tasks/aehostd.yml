@@ -48,6 +48,7 @@
   with_items:
     - "{{ aehostd_pw_file|dirname }}"
     - "{{ aehostd_db_dir }}"
+    - "{{ aehostd_sshkeys_dir }}"
   notify:
     - "restart aehostd"
 

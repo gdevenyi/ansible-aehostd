@@ -15,7 +15,8 @@ pidfile = {{ aehostd_pid_file }}
 socketpath = {{ aehostd_socket }}
 
 # The location at which the LDAP server(s) should be reachable.
-uri = {{ ldap_uris|join(' ') }}
+#uri = {{ ldap_uris|join(' ') }}
+uri = ldapi://%2Fopt%2Fae-dir%2Frun%2Fslapd%2Fldapi
 
 # preferred short bind-DN form (relocatable)
 binddn = host={{ inventory_hostname }},{{ ldap_suffix }}
@@ -33,3 +34,9 @@ pam_authz_search = {{ pam_authz_search }}
 
 # cache TTL for the synchronous LDAP searches
 cache_ttl = 5.0
+
+# pathname for sudoers export
+sudoers_file = /var/lib/aehostd/sudoers
+
+# where to write SSH authorized keys
+sshkeys_dir = {{ aehostd_sshkeys_dir }}
