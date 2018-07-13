@@ -84,8 +84,9 @@ Subsystem sftp {{ os_vars[lsb_id].ssh_lib_dir }}/sftp-server
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
 
-AuthenticationMethods publickey password
+AuthenticationMethods publickey
 
 Match User aehost-init
     # enable aehostd's password initialization via PAM
     PasswordAuthentication yes
+    AuthenticationMethods password
