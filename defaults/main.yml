@@ -51,7 +51,7 @@ aehostd_uid: "aehostd"
 aehostd_gid: "{{ aehostd_uid }}"
 
 # Python logging level
-aehostd_loglevel: "5"
+aehostd_loglevel: "20"
 
 # Pathnames of aehostd's files and directories
 aehostd_exec: "/usr/sbin/aehostd"
