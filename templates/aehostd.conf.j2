@@ -14,8 +14,14 @@ pidfile = {{ aehostd_pid_file }}
 # pathname of Unix domain socket
 socketpath = {{ aehostd_socket }}
 
+# The location at which the LDAP server(s) should be reachable
+# these LDAP URIs are tried first in this order no matter what
+uri_list = {{ ldap_uri_list|join(' ') }}
+# these LDAP URIs are tried after all in uri_first failed
+# (to balance load this list will be rotated based on FQDN hash)
+uri_pool = {{ ldap_uri_pool|join(' ') }}
+
 # The location at which the LDAP server(s) should be reachable.
-uri = {{ ldap_uris|join(' ') }}
 
 # preferred short bind-DN form (relocatable)
 binddn = host={{ inventory_hostname }},{{ ldap_suffix }}

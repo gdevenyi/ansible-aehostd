@@ -9,10 +9,10 @@ lsb_id_map:
 lsb_id: "{{ lsb_id_map.get(ansible_lsb.id,ansible_lsb.id) }}"
 
 # LDAPS URIs of primary AE-DIR servers (e.g. in same data center)
-ldap_uris: []
+ldap_uri_list: []
 
 # LDAPS URIs of backup AE-DIR servers (e.g. in other data center)
-ldap_backup_uris: []
+ldap_uri_pool: []
 
 # search base to use
 ldap_suffix: "ou=ae-dir"
