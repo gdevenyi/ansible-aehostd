@@ -40,7 +40,6 @@ os_vars:
 nsswitch_module: "aedir"
 nsswitch_passwd_module: "{{ nsswitch_module }}"
 nsswitch_group_module: "{{ nsswitch_module }}"
-nsswitch_sudoers_module: "ldap"
 # which module name to use in /etc/pam.d
 pam_module: "pam_{{ nsswitch_module }}.so"
 
