@@ -38,8 +38,6 @@ os_vars:
 
 # which module name to use in /etc/nsswitch.conf
 nsswitch_module: "aedir"
-nsswitch_passwd_module: "{{ nsswitch_module }}"
-nsswitch_group_module: "{{ nsswitch_module }}"
 # which module name to use in /etc/pam.d
 pam_module: "pam_{{ nsswitch_module }}.so"
 
