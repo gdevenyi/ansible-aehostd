@@ -37,11 +37,14 @@ pam_passmod_deny_msg = Changing password on local system is not allowed for this
 # Check the SSH client's hostname in user entry
 pam_authz_search = {{ pam_authz_search }}
 
+# maximum time to wait for connection and search results
+timelimit = 6
+
 # cache TTL for the synchronous LDAP searches
 cache_ttl = 5.0
 
-# pathname for sudoers export
-sudoers_file = /var/lib/aehostd/sudoers
+# pathname for sudoers export file
+sudoers_file = {{ aehostd_sudoers_file }}
 
 # where to write SSH authorized keys
 sshkeys_dir = {{ aehostd_sshkeys_dir }}

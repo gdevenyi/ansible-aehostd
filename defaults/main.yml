@@ -32,11 +32,9 @@ os_vars:
   Debian:
     sshd_service_name: "ssh"
     ssh_lib_dir: "/usr/lib/openssh"
-    sudo_ldap_conf: "/etc/sudo-ldap.conf"
   SUSE:
     sshd_service_name: "sshd"
     ssh_lib_dir: "/usr/lib/ssh"
-    sudo_ldap_conf: "/etc/ldap.conf"
 
 # which module name to use in /etc/nsswitch.conf
 nsswitch_module: "aedir"

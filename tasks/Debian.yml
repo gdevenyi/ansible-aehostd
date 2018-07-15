@@ -11,7 +11,7 @@
   with_items:
     - libpam-ldapd
     - libnss-ldapd
-    - sudo-ldap
+    - sudo
 
 - name: "Prepare virtualenv /opt/ae-dir needed for PIP installation"
   pip:
