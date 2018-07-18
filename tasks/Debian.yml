@@ -9,8 +9,8 @@
     cache_valid_time: 3600
     dpkg_options: 'force-confold,force-confdef'
   with_items:
-    - libpam-ldapd
-    - libnss-ldapd
+    - libpam-aedir
+    - libnss-aedir
     - sudo
 
 - name: "Prepare virtualenv /opt/ae-dir needed for PIP installation"
@@ -37,9 +37,3 @@
     - aehostd
   notify:
     - restart aehostd
-
-- name: "Ensure nslcd service is disabled and stopped"
-  service:
-    name: "nslcd"
-    state: stopped
-    enabled: no
