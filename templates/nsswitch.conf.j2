@@ -6,12 +6,12 @@
 # If you have the `glibc-doc-reference' and `info' packages installed, try:
 # `info libc "Name Service Switch"' for information about this file.
 
-passwd:         files {{ nsswitch_module }}
-group:          files {{ nsswitch_module }}
+passwd:         files [success=return] {{ nsswitch_module }}
+group:          files [success=return] {{ nsswitch_module }}
 shadow:         files
 gshadow:        files
 
-initgroups:     files {{ nsswitch_module }}
+initgroups:     files [success=return] {{ nsswitch_module }}
 
 hosts:          files dns
 networks:       files dns
