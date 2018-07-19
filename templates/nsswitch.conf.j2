@@ -11,6 +11,8 @@ group:          files {{ nsswitch_module }}
 shadow:         files
 gshadow:        files
 
+initgroups:     files {{ nsswitch_module }}
+
 hosts:          files dns
 networks:       files dns
 
