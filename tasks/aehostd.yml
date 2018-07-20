@@ -23,6 +23,16 @@
   notify:
     - "restart aehostd"
 
+- name: "Create directory {{ aehostd_lib_dir }}"
+  file:
+    path: "{{ aehostd_lib_dir }}"
+    state: directory
+    owner: "{{ aehostd_uid }}"
+    group: "{{ aehostd_gid }}"
+    mode: 0751
+  notify:
+    - "restart aehostd"
+
 - name: "Create directories for storing persistent files"
   file:
     path: "{{ item }}"
@@ -31,7 +41,6 @@
     group: "{{ aehostd_gid }}"
     mode: 0750
   with_items:
-    - "{{ aehostd_pw_file|dirname }}"
     - "{{ aehostd_db_dir }}"
     - "{{ aehostd_sshkeys_dir }}"
   notify:
