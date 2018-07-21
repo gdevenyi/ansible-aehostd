@@ -24,23 +24,8 @@ Environment=PYTHONHASHSEED=random
 Environment=PYTHONOPTIMIZE=2
 # avoid to accidentially write Python byte code
 Environment=PYTHONDONTWRITEBYTECODE=1
-CapabilityBoundingSet=
-AmbientCapabilities=
-ExecStart={{ aehostd_exec }} --no-fork --config {{ aehostd_conf_file }} --log-level {{ aehostd_loglevel }}
+ExecStart={{ aehostd_exec }} --no-fork --config {{ aehostd_conf_file }}
 
-# various hardening options
-MemoryDenyWriteExecute=yes
-PrivateTmp=yes
-ProtectSystem=full
-ProtectHome=yes
-ProtectKernelModules=yes
-ProtectKernelTunables=yes
-ProtectControlGroups=yes
-NoNewPrivileges=yes
-MountFlags=private
-SystemCallArchitectures=native
-RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
-PrivateDevices=yes
 {% if apparmor_enabled %}
 #AppArmorProfile=aehostd
 {% endif %}
