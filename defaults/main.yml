@@ -56,7 +56,7 @@ aehostd_sshkeys_dir: "{{ aehostd_lib_dir }}/sshkeys"
 aehostd_db_dir: "{{ aehostd_lib_dir }}/db"
 aehostd_run_dir: "/var/run/{{ aehostd_uid }}"
 aehostd_pw_file: "{{ aehostd_lib_dir }}/aehostd.pw"
-aehostd_sudoers_file: "{{ aehostd_lib_dir }}/sudoers"
+aehostd_sudoers_file: "{{ aehostd_lib_dir }}/ae-dir-export.sudoers"
 aehostd_pid_file: "{{ aehostd_run_dir }}/aehostd.pid"
 # Path name of Unix domain socket for listening
 # (must match value of nss-pam-ldapd's build-time config option --with-nslcd-socket)
