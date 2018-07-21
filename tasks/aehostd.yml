@@ -80,7 +80,7 @@
     mode: 0644
   notify:
     - "restart aehostd"
-  when: ansible_service_mgr == "systemd"
+  when: ansible_service_mgr == "systemd" and lsb_id != "SUSE"
 
 - name: "Make sure systemd unit files are reloaded"
   systemd:
