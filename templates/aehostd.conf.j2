@@ -46,8 +46,12 @@ timelimit = 6
 # cache TTL for the synchronous LDAP searches
 cache_ttl = 5.0
 
+{% if aehostd_sudoers_file %}
 # pathname for sudoers export file
 sudoers_file = {{ aehostd_sudoers_file }}
+{% endif %}
 
+{% if aehostd_sshkeys_dir %}
 # where to write SSH authorized keys
 sshkeys_dir = {{ aehostd_sshkeys_dir }}
+{% endif %}
