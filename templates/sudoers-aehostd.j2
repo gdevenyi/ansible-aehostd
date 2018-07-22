@@ -3,5 +3,5 @@
 #
 # {{ ansible_managed }}
 #
-aehostd ALL=(root) NOPASSWD: /usr/bin/chown root.root {{ aehostd_sudoers_file }}
-aehostd ALL=(root) NOPASSWD: /usr/bin/mv {{ aehostd_sudoers_file }} /etc/sudoers.d/
+aehostd ALL=(root) NOPASSWD: /bin/chown root.root {{ aehostd_sudoers_file }}
+aehostd ALL=(root) NOPASSWD: /bin/mv {{ aehostd_sudoers_file }} /etc/sudoers.d/
