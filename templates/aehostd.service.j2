@@ -14,8 +14,8 @@ After=network.target
 [Service]
 Type=simple
 PIDFile={{ aehostd_pid_file }}
-User={{ aehostd_uid }}
-Group={{ aehostd_gid }}
+User={{ aehostd_user }}
+Group={{ aehostd_group }}
 # force libldap to ignore ldap.conf
 Environment=LDAPNOINIT=1
 # let Python use random object identifier

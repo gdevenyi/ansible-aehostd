@@ -36,7 +36,7 @@ AuthorizedKeysFile {{ sshd_authorized_keys }}/%u
 # retrieve SSH keys loaded from AE-DIR from separate location
 # with different ownership
 AuthorizedKeysCommand /bin/cat '{{ aehostd_sshkeys_dir }}/%u'
-AuthorizedKeysCommandUser {{ aehostd_uid }}
+AuthorizedKeysCommandUser {{ aehostd_user }}
 
 # Don't read the user's ~/.rhosts and ~/.shosts files
 IgnoreRhosts yes

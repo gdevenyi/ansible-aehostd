@@ -3,6 +3,29 @@
 - name: "Install packages on {{ lsb_id }}"
   include_tasks: "{{ lsb_id }}.yml"
 
+- name: "Add local system group {{ aehostd_group }}"
+  group:
+    name: "{{ aehostd_group }}"
+    gid: "{{ aehostd_gid }}"
+    state: present
+    system: yes
+  notify:
+  - "restart aehostd"
+
+- name: "Add local system account {{ aehostd_user }}"
+  user:
+    name: "{{ aehostd_user }}"
+    comment: "aehostd system user"
+    uid: "{{ aehostd_uid }}"
+    group: "{{ aehostd_group }}"
+    shell: "/bin/nologin"
+    state: present
+    system: yes
+    createhome: no
+    non_unique: no
+  notify:
+  - "restart aehostd"
+
 - name: "CA certificate file {{ ldap_cacert_pathname }}"
   copy:
     src: "{{ ldap_cacert_filename }}"
@@ -18,7 +41,7 @@
     src: "{{ aehostd_conf_file|basename }}.j2"
     dest: "{{ aehostd_conf_file }}"
     owner: root
-    group: "{{ aehostd_gid }}"
+    group: "{{ aehostd_group }}"
     mode: 0640
   notify:
     - "restart aehostd"
@@ -37,8 +60,8 @@
   file:
     path: "{{ aehostd_lib_dir }}"
     state: directory
-    owner: "{{ aehostd_uid }}"
-    group: "{{ aehostd_gid }}"
+    owner: "{{ aehostd_user }}"
+    group: "{{ aehostd_group }}"
     mode: 0751
   notify:
     - "restart aehostd"
@@ -47,8 +70,8 @@
   file:
     path: "{{ item }}"
     state: directory
-    owner: "{{ aehostd_uid }}"
-    group: "{{ aehostd_gid }}"
+    owner: "{{ aehostd_user }}"
+    group: "{{ aehostd_group }}"
     mode: 0750
   with_items:
     - "{{ aehostd_db_dir }}"
@@ -60,8 +83,8 @@
   file:
     path: "{{ item }}"
     state: directory
-    owner: "{{ aehostd_uid }}"
-    group: "{{ aehostd_gid }}"
+    owner: "{{ aehostd_user }}"
+    group: "{{ aehostd_group }}"
     mode: 0755
   with_items:
     - "{{ aehostd_pid_file|dirname }}"
@@ -73,8 +96,8 @@
   copy:
     content: "{{ ldap_host_password }}"
     dest: "{{ aehostd_pw_file }}"
-    owner: "{{ aehostd_uid }}"
-    group: "{{ aehostd_gid }}"
+    owner: "{{ aehostd_user }}"
+    group: "{{ aehostd_group }}"
     mode: 0640
   no_log: True
   when: ldap_host_password is defined and ldap_host_password != ""
