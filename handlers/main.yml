@@ -9,3 +9,13 @@
 
 - name: "restart sshd"
   service: name="sshd" state=restarted
+
+- name: "refresh sudoers"
+  file:
+    path: "{{ item }}"
+    state: absent
+  ignore_errors: yes
+  with_items:
+    - "{{ aehostd_sudoers_file }}"
+    - "{{ aehostd_sudoers_file }}.ldif"
+    - "{{ aehostd_sudoers_file }}.tmp"

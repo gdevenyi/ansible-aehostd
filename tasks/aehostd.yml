@@ -23,6 +23,16 @@
   notify:
     - "restart aehostd"
 
+- name: "Create /etc/sudoers.d/aehostd"
+  template:
+    src: "sudoers-aehostd.j2"
+    dest: "/etc/sudoers.d/aehostd"
+    owner: root
+    group: root
+    mode: 0440
+  notify:
+    - "refresh sudoers"
+
 - name: "Create directory {{ aehostd_lib_dir }}"
   file:
     path: "{{ aehostd_lib_dir }}"

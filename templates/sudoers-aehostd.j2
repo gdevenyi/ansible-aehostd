@@ -1,0 +1,7 @@
+# aehostd must be allowed to install new exported sudoers file
+# with root ownership to final destination in /etc/sudoers.d/
+#
+# {{ ansible_managed }}
+#
+aehostd ALL=(root) NOPASSWD: /usr/bin/chown root.root {{ aehostd_sudoers_file }}
+aehostd ALL=(root) NOPASSWD: /usr/bin/mv {{ aehostd_sudoers_file }} /etc/sudoers.d/
