@@ -73,6 +73,10 @@ nscd_conf_file: "/etc/nscd.conf"
 # service name of SSH demon
 sshd_service_name: "{{ os_vars[lsb_id].sshd_service_name }}"
 
+# which SFTP server to use (disable completely with empty string)
+#ssh_sftp_server: "{{ os_vars[lsb_id].ssh_lib_dir }}/sftp-server"
+ssh_sftp_server: "internal-sftp"
+
 # Filename of Jinja2 template file used for generating sshd_config
 sshd_config_template: "sshd_config.j2"
 sshd_authorized_keys: "/etc/ssh/authorized_keys"
