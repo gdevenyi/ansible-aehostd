@@ -46,16 +46,6 @@
   notify:
     - "restart aehostd"
 
-- name: "Create /etc/sudoers.d/aehostd"
-  template:
-    src: "sudoers-aehostd.j2"
-    dest: "/etc/sudoers.d/aehostd"
-    owner: root
-    group: root
-    mode: 0440
-  notify:
-    - "refresh sudoers"
-
 - name: "Create directory {{ aehostd_lib_dir }}"
   file:
     path: "{{ aehostd_lib_dir }}"
@@ -104,7 +94,7 @@
   notify:
     - "restart aehostd"
 
-- name: "Install systemd unit file"
+- name: "Install systemd unit file for aehostd"
   template:
     src: "aehostd.service.j2"
     dest: "/etc/systemd/system/aehostd.service"
@@ -115,13 +105,27 @@
     - "restart aehostd"
   when: ansible_service_mgr == "systemd" and lsb_id != "SUSE"
 
+- name: "Install systemd unit file for aehostd-ph"
+  template:
+    src: "aehostd-ph.service.j2"
+    dest: "/etc/systemd/system/aehostd-ph.service"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - "restart aehostd-ph"
+  when: ansible_service_mgr == "systemd" and lsb_id != "SUSE"
+
 - name: "Make sure systemd unit files are reloaded"
   systemd:
     daemon_reload: yes
   when: ansible_service_mgr == "systemd"
 
-- name: "Ensure aehostd service is enabled and running"
+- name: "Ensure aehostd services are enabled and running"
   service:
-    name: "aehostd"
+    name: "{{ item }}"
     state: started
     enabled: yes
+  with_items:
+    - aehostd
+    - aehostd-ph

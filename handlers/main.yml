@@ -4,6 +4,9 @@
 - name: "restart aehostd"
   service: name=aehostd state=restarted
 
+- name: "restart aehostd-ph"
+  service: name=aehostd-ph state=restarted
+
 - name: "restart ssh"
   service: name="ssh" state=restarted
 
