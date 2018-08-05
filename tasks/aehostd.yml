@@ -45,6 +45,7 @@
     mode: 0640
   notify:
     - "restart aehostd"
+    - "restart aehostd-ph"
 
 - name: "Create directory {{ aehostd_lib_dir }}"
   file:
