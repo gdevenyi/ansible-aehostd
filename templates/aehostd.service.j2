@@ -27,15 +27,18 @@ Environment=PYTHONDONTWRITEBYTECODE=1
 ExecStart={{ aehostd_exec }} --no-fork --config {{ aehostd_conf_file }} --pid {{ aehostd_pid_file }}
 Restart=always
 KillSignal=SIGQUIT
+StandardError=syslog
 # various hardening options
 CapabilityBoundingSet=
 AmbientCapabilities=
+LockPersonality=yes
 PrivateTmp=yes
 ProtectSystem=full
 ProtectHome=yes
 ProtectKernelModules=yes
 ProtectKernelTunables=yes
 ProtectControlGroups=yes
+RestrictRealtime=yes
 NoNewPrivileges=yes
 MountFlags=private
 SystemCallArchitectures=native

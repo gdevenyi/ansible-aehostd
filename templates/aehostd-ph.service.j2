@@ -23,19 +23,22 @@ Environment=PYTHONDONTWRITEBYTECODE=1
 ExecStart={{ aehostd_exec }}-ph --no-fork --config {{ aehostd_conf_file }} --pid {{ aehostd_pid_file|dirname }}/aehostd-ph.pid
 Restart=always
 KillSignal=SIGQUIT
+StandardError=syslog
 # various hardening options
 CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
 AmbientCapabilities=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
+LockPersonality=yes
 PrivateTmp=yes
-#ProtectSystem=full
+ProtectSystem=yes
 ProtectHome=yes
 ProtectKernelModules=yes
 ProtectKernelTunables=yes
 ProtectControlGroups=yes
+RestrictRealtime=yes
 NoNewPrivileges=yes
 MountFlags=private
 SystemCallArchitectures=native
-RestrictAddressFamilies=
+RestrictAddressFamilies=AF_UNIX
 PrivateDevices=yes
 
 [Install]
