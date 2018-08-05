@@ -26,7 +26,7 @@
 - name: "Additional PIP packages in virtualenv /opt/ae-dir on {{ lsb_id }}"
   pip:
     name: "{{ item }}"
-    state: present
+    state: latest
     virtualenv: "/opt/ae-dir"
     virtualenv_python: python2.7
   with_items:
