@@ -26,7 +26,7 @@
 - name: "Install AE-DIR host demon for module {{ nsswitch_module }}"
   include_tasks: "aehostd.yml"
 
-- name: "Install caching demon for module {{ nsswitch_module }}"
+- name: "Install name service caching demon (nscd)"
   include_tasks: "nscd.yml"
   when:
     nscd_enabled == True
