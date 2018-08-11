@@ -21,8 +21,6 @@ uri_list = {{ ldap_uri_list|join(' ') }}
 # (to balance load this list will be rotated based on FQDN hash)
 uri_pool = {{ ldap_uri_pool|join(' ') }}
 
-# The location at which the LDAP server(s) should be reachable.
-
 # preferred short bind-DN form (relocatable)
 binddn = host={{ inventory_hostname }},{{ ldap_suffix }}
 # pathname of file containing password for the above binddn
@@ -52,3 +50,15 @@ sudoers_file = {{ aehostd_sudoers_file }}
 # where to write SSH authorized keys
 sshkeys_dir = {{ aehostd_sshkeys_dir }}
 {% endif %}
+
+# home directory beneath /tmp
+#homedir_tmpl = /tmp/{username}
+
+# refresh time for passwd and group maps
+#users_refresh = 8.0
+
+# parent entry level beneath which to search for network address entries
+#netaddr_level = 2
+
+# refresh time for hosts map
+#netaddr_refresh = 1800.0
