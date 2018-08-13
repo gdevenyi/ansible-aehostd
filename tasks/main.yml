@@ -58,17 +58,15 @@
 
 - name: "Install PAM config files from {{ pam_template_dir }}/"
   template:
-    src: "{{ pam_template_dir }}/{{ item }}.j2"
-    dest: "/etc/pam.d/{{ item }}"
+    src: "{{ item }}"
+    dest: "/etc/pam.d/{{ (item|basename)[:-3] }}"
     owner: root
     group: root
     mode: 0644
-  with_items:
-    - common-account
-    - common-auth
-    - common-password
-    - common-session
-#    - common-session-noninteractive
+  with_fileglob:
+    "{{ pam_template_dir }}/*.j2"
+  tags:
+    - pam
 
 - name: "Install sudoers file"
   template:

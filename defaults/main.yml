@@ -89,7 +89,7 @@ ssh_emergency_root_keys: "ssh_emergency_root_keys"
 
 # where to find the system-specific Jinja2 templates
 # for creating PAM config files /etc/pam.d/common-*
-pam_template_dir: "{{ lsb_id }}"
+pam_template_dir: "{{ role_path }}/templates/{{ lsb_id }}"
 
 # LDAP search filter for PAM authorization
 #-----------------------------------------
