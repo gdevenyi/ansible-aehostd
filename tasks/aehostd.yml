@@ -1,6 +1,6 @@
 ---
 
-- name: "Install packages on {{ lsb_id }}"
+- name: "Install aehostd on {{ lsb_id }}"
   include_tasks: "{{ lsb_id }}.yml"
 
 - name: "Add local system group {{ aehostd_group }}"
