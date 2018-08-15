@@ -8,8 +8,8 @@
 
 [Unit]
 Description=NSS/PAM service for AE-DIR
-Requires=network.target
-After=network.target
+Requires=local-fs.target network.target
+After=local-fs.target network.target
 
 [Service]
 Type=simple

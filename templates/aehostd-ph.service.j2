@@ -8,6 +8,8 @@
 
 [Unit]
 Description=Privileged helper service for AE-DIR
+Requires=local-fs.target
+After=local-fs.target
 
 [Service]
 Type=simple
