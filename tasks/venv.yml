@@ -12,15 +12,14 @@
 
 - name: "Additional PIP packages in virtualenv /opt/ae-dir on {{ lsb_id }}"
   pip:
-    name: "{{ item }}"
+    name:
+      - pyasn1
+      - pyasn1_modules
+      - ldap0
+      - aedir
+      - aehostd
     state: latest
     virtualenv: "/opt/ae-dir"
     virtualenv_python: python2.7
-  with_items:
-    - pyasn1
-    - pyasn1_modules
-    - ldap0
-    - aedir
-    - aehostd
   notify:
     - restart aehostd

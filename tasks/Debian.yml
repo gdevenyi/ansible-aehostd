@@ -2,16 +2,15 @@
 
 - name: "Install packages on {{ lsb_id }}"
   apt:
-    name: "{{ item }}"
+    name:
+      - libpam-aedir
+      - libnss-aedir
+      - sudo
     state: present
     install_recommends: no
     update_cache: yes
     cache_valid_time: 3600
     dpkg_options: 'force-confold,force-confdef'
-  with_items:
-    - libpam-aedir
-    - libnss-aedir
-    - sudo
 
 - name: "Install aehostd in {{ lsb_id }} in virtual env"
   include_tasks: "venv.yml"

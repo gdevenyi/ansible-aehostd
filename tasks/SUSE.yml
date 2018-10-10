@@ -2,17 +2,16 @@
 
 - name: "Install packages on {{ lsb_id }}"
   zypper:
-    name: "{{ item }}"
+    name:
+      - python-ldap0
+      - python-aedir
+      - python-lockfile
+      - python-python-daemon
+      - aehostd-modules
+      - aehostd
+      - sudo
     state: latest
     disable_recommends: yes
     type: package
-  with_items:
-    - python-ldap0
-    - python-aedir
-    - python-lockfile
-    - python-python-daemon
-    - aehostd-modules
-    - aehostd
-    - sudo
   notify:
     - "restart aehostd"

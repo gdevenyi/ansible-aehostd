@@ -29,12 +29,18 @@ ldap_cacert_pathname: "/etc/ssl/{{ ldap_cacert_filename|basename }}"
 
 # nested dict of OS-specific vars
 os_vars:
+  CentOS:
+    sshd_service_name: "sshd"
+    ssh_lib_dir: "/usr/libexec/openssh"
+    aehostd_exec: "/opt/ae-dir/bin/aehostd"
   Debian:
     sshd_service_name: "ssh"
     ssh_lib_dir: "/usr/lib/openssh"
+    aehostd_exec: "/opt/ae-dir/bin/aehostd"
   SUSE:
     sshd_service_name: "sshd"
     ssh_lib_dir: "/usr/lib/ssh"
+    aehostd_exec: "/usr/sbin/aehostd"
 
 # which module name to use in /etc/nsswitch.conf
 nsswitch_module: "aedir"
@@ -51,7 +57,7 @@ aehostd_gid: "{{ aehostd_uid }}"
 aehostd_loglevel: "20"
 
 # Pathnames of aehostd's files and directories
-aehostd_exec: "/usr/sbin/aehostd"
+aehostd_exec: "{{ os_vars[lsb_id].aehostd_exec }}"
 aehostd_conf_file: "/etc/aehostd.conf"
 aehostd_lib_dir: "/var/lib/{{ aehostd_user }}"
 aehostd_sshkeys_dir: "{{ aehostd_lib_dir }}/sshkeys"
