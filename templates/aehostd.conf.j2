@@ -4,15 +4,18 @@
 
 [aehostd]
 
+# pathname of Unix domain socket for listening to incoming PAM and NSS requests
+socketpath = {{ aehostd_socket }}
+
 # The user and group to run as
 uid = {{ aehostd_user }}
 gid = {{ aehostd_group }}
 
 # for debugging set this below 20
 loglevel = {{ aehostd_loglevel }}
-
-# pathname of Unix domain socket
-socketpath = {{ aehostd_socket }}
+# Path name of syslog socket: Setting this to a string enforces using syslog,
+# empty string results in default /dev/log being used
+logsocket = 
 
 # The location at which the LDAP server(s) should be reachable
 # these LDAP URIs are tried first in this order no matter what
@@ -55,7 +58,7 @@ sshkeys_dir = {{ aehostd_sshkeys_dir }}
 #homedir_tmpl = /tmp/{username}
 
 # refresh time for passwd and group maps
-#users_refresh = 8.0
+#refresh_sleep = 60.0
 
 # parent entry level beneath which to search for network address entries
 #netaddr_level = 2
