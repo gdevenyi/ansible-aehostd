@@ -60,6 +60,9 @@ sshkeys_dir = {{ aehostd_sshkeys_dir }}
 homedir_tmpl = {{ aehostd_homedir_tmpl }}
 {% endif %}
 
+# group membership attribute used
+#memberattr = memberUid
+
 # sleep time between two passwd/group/sudoers/sshkeys refresh runs
 refresh_sleep = {{ aehostd_refresh_sleep }}
 
