@@ -11,10 +11,11 @@ socketpath = {{ aehostd_socket }}
 uid = {{ aehostd_user }}
 gid = {{ aehostd_group }}
 
-# for debugging set this below 20
+# for debugging set this below or equal 10
 loglevel = {{ aehostd_loglevel }}
-# Path name of syslog socket: Setting this to a string enforces using syslog,
-# empty string results in default /dev/log being used
+# path name of syslog socket:
+# Setting this to a string enforces using syslog, empty string results
+# in default /dev/log being used
 logsocket = 
 
 # The location at which the LDAP server(s) should be reachable
@@ -54,11 +55,13 @@ sudoers_file = {{ aehostd_sudoers_file }}
 sshkeys_dir = {{ aehostd_sshkeys_dir }}
 {% endif %}
 
-# home directory beneath /tmp
-#homedir_tmpl = /tmp/{username}
+{% if aehostd_homedir_tmpl %}
+# home directory template
+homedir_tmpl = {{ aehostd_homedir_tmpl }}
+{% endif %}
 
-# refresh time for passwd and group maps
-#refresh_sleep = 60.0
+# sleep time between two passwd/group/sudoers/sshkeys refresh runs
+refresh_sleep = {{ aehostd_refresh_sleep }}
 
 # parent entry level beneath which to search for network address entries
 #netaddr_level = 2

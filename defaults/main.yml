@@ -70,6 +70,13 @@ aehostd_pid_file: "{{ aehostd_run_dir }}/aehostd.pid"
 # (must match value of nss-pam-ldapd's build-time config option --with-nslcd-socket)
 aehostd_socket: "{{ aehostd_run_dir }}/aehostd.sock"
 
+# sleep time between two passwd/group/sudoers/sshkeys refresh runs
+aehostd_refresh_sleep: "90.0"
+
+# template string to use to derive homeDirectory from username
+#aehostd_homedir_tmpl: "/home/{user}"
+aehostd_homedir_tmpl: ""
+
 # flag whether to enable nscd
 nscd_enabled: False
 
@@ -90,8 +97,15 @@ sshd_authorized_keys: "/etc/ssh/authorized_keys"
 # ListenAddress values
 sshd_listen_addresses: []
 
+# Log level for sshd
+sshd_loglevel: "INFO"
+
 # File name of emergency authorized keys for user root
 ssh_emergency_root_keys: "ssh_emergency_root_keys"
+
+# Path name of public keys trusted for signing user certs
+#ssh_trusted_userca_keys: "/etc/ssh/trusted_user_ca_keys"
+ssh_trusted_userca_keys: ""
 
 # where to find the system-specific Jinja2 templates
 # for creating PAM config files /etc/pam.d/common-*
