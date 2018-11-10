@@ -18,6 +18,9 @@ loglevel = {{ aehostd_loglevel }}
 # in default /dev/log being used
 logsocket = 
 
+# interval (seconds) at which internal monitoring data is written to log
+monitor = 60.0
+
 # The location at which the LDAP server(s) should be reachable
 # these LDAP URIs are tried first in this order no matter what
 uri_list = {{ ldap_uri_list|join(' ') }}
