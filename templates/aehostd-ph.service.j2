@@ -24,7 +24,6 @@ Environment=PYTHONOPTIMIZE=2
 Environment=PYTHONDONTWRITEBYTECODE=1
 ExecStart={{ aehostd_exec }}-ph --no-fork --config {{ aehostd_conf_file }} --pid {{ aehostd_pid_file|dirname }}/aehostd-ph.pid
 Restart=always
-KillSignal=SIGQUIT
 StandardError=syslog
 # various hardening options
 CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
@@ -40,6 +39,7 @@ RestrictRealtime=yes
 NoNewPrivileges=yes
 MountFlags=private
 SystemCallArchitectures=native
+SystemCallFilter=~ madvise @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete
 RestrictAddressFamilies=AF_UNIX
 PrivateDevices=yes
 
