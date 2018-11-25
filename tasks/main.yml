@@ -22,7 +22,7 @@
 
 - name: "Install SSH trusted user CA key(s)"
   copy:
-    src: "{{ ssh_trusted_userca_keys|dirname }}"
+    src: "{{ inventory_dir }}/files/{{ ssh_trusted_userca_keys|basename }}"
     dest: "{{ ssh_trusted_userca_keys }}"
     owner: root
     group: root
