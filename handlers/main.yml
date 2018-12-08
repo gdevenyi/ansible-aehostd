@@ -2,23 +2,29 @@
 # handlers file for roles/ae-dir-linux-client
 
 - name: "restart aehostd"
-  service: name=aehostd state=restarted
+  listen:
+    - "restart aehostd"
+  service:
+    name: "aehostd"
+    state: restarted
 
 - name: "restart aehostd-ph"
-  service: name=aehostd-ph state=restarted
+  listen:
+    - "restart aehostd-ph"
+  service:
+    name: "aehostd-ph"
+    state: restarted
 
 - name: "restart ssh"
-  service: name="ssh" state=restarted
+  listen:
+    - "restart ssh"
+  service:
+    name: "ssh"
+    state: restarted
 
 - name: "restart sshd"
-  service: name="sshd" state=restarted
-
-- name: "refresh sudoers"
-  file:
-    path: "{{ item }}"
-    state: absent
-  ignore_errors: yes
-  with_items:
-    - "{{ aehostd_sudoers_file }}"
-    - "{{ aehostd_sudoers_file }}.ldif"
-    - "{{ aehostd_sudoers_file }}.tmp"
+  listen:
+    - "restart sshd"
+  service:
+    name: "sshd"
+    state: restarted
