@@ -9,6 +9,7 @@
 [Unit]
 Description=NSS/PAM service for AE-DIR
 Requires=local-fs.target network.target
+Before=nss-user-lookup.target
 After=local-fs.target network.target
 
 [Service]
