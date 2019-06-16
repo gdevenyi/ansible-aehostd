@@ -25,12 +25,13 @@ Environment=PYTHONHASHSEED=random
 Environment=PYTHONOPTIMIZE=2
 # avoid to accidentially write Python byte code
 Environment=PYTHONDONTWRITEBYTECODE=1
-ExecStart={{ aehostd_exec }} --no-fork --config {{ aehostd_conf_file }} --pid {{ aehostd_pid_file }}
+ExecStart={{ aedir_python }} -m aehostd.srv --no-fork --pid {{ aehostd_pid_file }} --config {{ aehostd_conf_file }}
 Restart=always
 StandardError=syslog
 # various hardening options
 CapabilityBoundingSet=
 AmbientCapabilities=
+LockPersonality=yes
 PrivateTmp=yes
 PrivateDevices=yes
 ProtectSystem=full
@@ -38,11 +39,12 @@ ProtectHome=yes
 ProtectKernelModules=yes
 ProtectKernelTunables=yes
 ProtectControlGroups=yes
-RestrictRealtime=yes
 NoNewPrivileges=yes
 MountFlags=private
 LockPersonality=yes
+RestrictRealtime=yes
 RestrictNamespaces=yes
+RestrictSUIDSGID=yes
 KeyringMode=private
 SystemCallArchitectures=native
 SystemCallFilter=~ @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete
