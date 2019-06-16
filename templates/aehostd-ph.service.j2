@@ -30,6 +30,7 @@ CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
 AmbientCapabilities=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
 LockPersonality=yes
 PrivateTmp=yes
+PrivateDevices=yes
 ProtectSystem=yes
 ProtectHome=yes
 ProtectKernelModules=yes
@@ -38,10 +39,16 @@ ProtectControlGroups=yes
 RestrictRealtime=yes
 NoNewPrivileges=yes
 MountFlags=private
+LockPersonality=yes
+RestrictNamespaces=yes
+KeyringMode=private
 SystemCallArchitectures=native
 SystemCallFilter=~ madvise @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete
 RestrictAddressFamilies=AF_UNIX
-PrivateDevices=yes
+
+{% if apparmor_enabled %}
+#AppArmorProfile=aehostd-ph
+{% endif %}
 
 [Install]
 WantedBy=multi-user.target
