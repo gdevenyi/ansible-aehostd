@@ -95,6 +95,15 @@
   notify:
     - "restart aehostd"
 
+- name: "Set ownership/permissions of {{ aehostd_pw_file }}"
+  file:
+    path: "{{ aehostd_pw_file }}"
+    owner: "{{ aehostd_user }}"
+    group: "{{ aehostd_group }}"
+    mode: 0640
+  notify:
+    - "restart aehostd"
+
 - name: "Install systemd unit file for aehostd"
   template:
     src: "aehostd.service.j2"
