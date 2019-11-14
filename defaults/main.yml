@@ -32,15 +32,15 @@ os_vars:
   CentOS:
     sshd_service_name: "sshd"
     ssh_lib_dir: "/usr/libexec/openssh"
-    python: "/opt/ae-dir/bin/python2"
+    python: "/opt/ae-dir/bin/python3"
   Debian:
     sshd_service_name: "ssh"
     ssh_lib_dir: "/usr/lib/openssh"
-    python: "/opt/ae-dir/bin/python2"
+    python: "/opt/ae-dir/bin/python3"
   SUSE:
     sshd_service_name: "sshd"
     ssh_lib_dir: "/usr/lib/ssh"
-    python: "/usr/bin/python2"
+    python: "/usr/bin/python3"
 
 # which module name to use in /etc/nsswitch.conf
 nsswitch_module: "aedir"
@@ -57,7 +57,7 @@ aehostd_gid: "{{ aehostd_uid }}"
 aehostd_loglevel: "20"
 
 # Python interpreter
-aedir_python: "{{ os_vars[lsb_id].python }}"
+aedir_python: "{{ os_vars[lsb_id].python }} -ROOBs"
 
 # Pathnames of aehostd's files and directories
 aehostd_conf_file: "/etc/aehostd.conf"
