@@ -3,10 +3,10 @@
 - name: "Install packages on {{ lsb_id }}"
   zypper:
     name:
-      - python-ldap0==0.2.7
-      - python-aedir==0.3.0
-      - python-lockfile
-      - python-python-daemon
+      - python3-ldap0>=0.6.0
+      - python3-aedir>=0.6.0
+      - python3-lockfile
+      - python3-python-daemon
       - aehostd-modules
       - aehostd
       - sudo
