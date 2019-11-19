@@ -1,11 +1,12 @@
 ---
 
-- name: "Install packages on {{ lsb_id }}"
+- name: "Install base OS packages"
   apt:
     name:
       - libpam-aedir
       - libnss-aedir
       - sudo
+      - python3-venv
     state: present
     install_recommends: no
     update_cache: yes
