@@ -75,6 +75,9 @@ aehostd_socket: "{{ aehostd_run_dir }}/aehostd.sock"
 # sleep time between two passwd/group/sudoers/sshkeys refresh runs
 aehostd_refresh_sleep: "90.0"
 
+# Time span (seconds) after which aehostd forcibly reconnects.
+aehostd_conn_ttl: "7200"
+
 # template string to use to derive homeDirectory from username
 #aehostd_homedir_tmpl: "/home/{user}"
 aehostd_homedir_tmpl: ""

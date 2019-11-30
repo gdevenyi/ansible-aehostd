@@ -86,7 +86,7 @@ tls_cacertfile = {{ ldap_cacert_pathname }}
 
 # Time span (seconds) after which aehostd forcibly reconnects.
 # Default: 1800 (30 min.)
-#conn_ttl = 1800.0
+conn_ttl = {{ aehostd_conn_ttl }}
 
 # NSS map parameters
 #-------------------------------------------
