@@ -15,8 +15,8 @@
     name:
       - pyasn1
       - pyasn1_modules
-      - ldap0>=0.6.0
-      - aedir>=0.6.0
+      - ldap0>=0.6.4
+      - aedir>=0.7.0
       - aehostd>=0.11.0
     state: latest
     virtualenv: "/opt/ae-dir"
