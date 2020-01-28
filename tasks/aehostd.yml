@@ -101,6 +101,7 @@
     owner: "{{ aehostd_user }}"
     group: "{{ aehostd_group }}"
     mode: 0640
+  ignore_errors: yes
   notify:
     - "restart aehostd"
 
