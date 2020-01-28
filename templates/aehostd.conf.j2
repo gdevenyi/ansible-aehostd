@@ -25,7 +25,7 @@ logsocket = /dev/log
 # Interval (seconds) at which internal monitoring data is written to log.
 # Setting this to zero or negative value disables monitor logging completely.
 # The default is -1.0 (disabled).
-#monitor = 60.0
+monitor = {{ aehostd_monitor }}
 
 # Parameters for the Unix domain socket over which
 # to receive requests from front-end modules
