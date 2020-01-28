@@ -77,7 +77,7 @@ aehostd_refresh_sleep: "90.0"
 
 # Interval (seconds) at which internal monitoring data is written to log.
 # Setting this to zero or negative value disables monitor logging completely.
-aehostd_monitor = "-1.0"
+aehostd_monitor: "-1.0"
 
 # Time span (seconds) after which aehostd forcibly reconnects.
 aehostd_conn_ttl: "7200"
