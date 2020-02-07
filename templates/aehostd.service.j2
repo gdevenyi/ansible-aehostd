@@ -49,7 +49,7 @@ RestrictNamespaces=yes
 RestrictSUIDSGID=yes
 KeyringMode=private
 SystemCallArchitectures=native
-SystemCallFilter=~ @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete
+SystemCallFilter=~ @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete @chown @timer @privileged
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
 
 {% if apparmor_enabled %}
