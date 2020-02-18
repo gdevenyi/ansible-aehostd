@@ -51,16 +51,16 @@ socketpath = {{ aehostd_socket }}
 # List of LDAP servers (LDAP URIs) to try first in exactly this order
 # no matter what is configured in uri_pool.
 # Default: empty list.
-uri_list = {{ ldap_uri_list|join(' ') }}
+uri_list = {{ aehostd_uri_list|join(' ') }}
 
 # List of LDAP servers (LDAP URIs) to try after all LDAP URIs defined with uri_list failed.
 # This list gets rotated based on hosts's canonical FQDN for client-side load-balancing.
 # Default: empty list.
-uri_pool = {{ ldap_uri_pool|join(' ') }}
+uri_pool = {{ aehostd_uri_pool|join(' ') }}
 
 # The bind-DN to use when binding as service to AE-DIR with simple bind.
 # Preferrably the short bind-DN should be used.
-binddn = host={{ inventory_hostname }},{{ ldap_suffix }}
+binddn = host={{ inventory_hostname }},{{ aehostd_searchbase }}
 
 # The password file to use for simple bind as identity given in binddn.
 # Default is: /var/lib/aehostd/aehostd.pw
@@ -76,7 +76,7 @@ bindpwfile = {{ aehostd_pw_file }}
 
 # File containing trusted root CA certificate(s).
 # Default: None, which means use system-wide trust store.
-tls_cacertfile = {{ ldap_cacert_pathname }}
+tls_cacertfile = {{ aehostd_cacert_pathname }}
 
 # File containing client certificate used for SASL/EXTERNAL bind.
 #tls_cert = /etc/aehostd.crt
@@ -184,7 +184,7 @@ sudoers_includedir = /etc/sudoers.d
 # PAM parameters
 #-------------------------------------------
 # LDAP filter template used for checking authorization of a user
-pam_authz_search = {{ pam_authz_search }}
+pam_authz_search = {{ aehostd_pam_authz_search }}
 
 # Error message sent to user about password change disabled/denied
 pam_passmod_deny_msg = Changing password on local system is not allowed for this user!

@@ -11,7 +11,7 @@
 # non-interactive
 #
 session	required	pam_limits.so
-session	sufficient	{{ pam_module }}	minimum_uid={{ ldap_min_uid }}
+session	sufficient	{{ aehostd_pam_module }}	minimum_uid={{ aehostd_min_uid }}
 session	required	pam_unix.so
 session	optional	pam_umask.so
 session	optional	pam_env.so

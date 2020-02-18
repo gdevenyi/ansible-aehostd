@@ -1,7 +1,7 @@
 ---
 
-- name: "Install aehostd on {{ lsb_id }}"
-  include_tasks: "{{ lsb_id }}.yml"
+- name: "Install aehostd"
+  include_tasks: "{{ aehostd_lsb_id }}.yml"
 
 - name: "Add local system group {{ aehostd_group }}"
   group:
@@ -26,10 +26,10 @@
   notify:
   - "restart aehostd"
 
-- name: "CA certificate file {{ ldap_cacert_pathname }}"
+- name: "CA certificate file {{ aehostd_cacert_pathname }}"
   copy:
-    src: "{{ ldap_cacert_filename }}"
-    dest: "{{ ldap_cacert_pathname }}"
+    src: "{{ aehostd_cacert_filename }}"
+    dest: "{{ aehostd_cacert_pathname }}"
     owner: root
     group: root
     mode: 0644
@@ -114,7 +114,7 @@
     mode: 0644
   notify:
     - "restart aehostd"
-  when: ansible_service_mgr == "systemd" and lsb_id != "SUSE"
+  when: ansible_service_mgr == "systemd"
 
 - name: "Install systemd unit file for aehostd-ph"
   template:
@@ -125,7 +125,7 @@
     mode: 0644
   notify:
     - "restart aehostd-ph"
-  when: ansible_service_mgr == "systemd" and lsb_id != "SUSE"
+  when: ansible_service_mgr == "systemd"
 
 - name: "Make sure systemd unit files are reloaded"
   systemd:

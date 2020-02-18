@@ -3,15 +3,19 @@
 - name: "Install base OS packages"
   apt:
     name:
-      - libpam-aedir
-      - libnss-aedir
       - sudo
-      - python3-venv
     state: present
+    update_cache: no
     install_recommends: no
-    update_cache: yes
-    cache_valid_time: 3600
     dpkg_options: 'force-confold,force-confdef'
 
-- name: "Install aehostd in {{ lsb_id }} in virtual env"
+- name: "Install NSS and PAM modules"
+  apt:
+    name: "{{ aehostd_module_packages }}"
+    state: present
+    update_cache: no
+    install_recommends: no
+    dpkg_options: 'force-confold,force-confdef'
+
+- name: "Install aehostd in virtual env"
   include_tasks: "venv.yml"

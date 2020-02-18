@@ -1,6 +1,6 @@
 ---
 
-- name: "Install packages on {{ lsb_id }}"
+- name: "Install packages"
   zypper:
     name:
       - python3-ldap0>=0.6.8

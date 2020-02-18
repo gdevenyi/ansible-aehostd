@@ -5,9 +5,9 @@
 # What ports, IPs and protocols we listen for
 Port 22
 
-{% if sshd_listen_addresses %}
+{% if aehostd_sshd_listen_addresses %}
 # Restrict which interfaces/protocols sshd will bind to
-{% for listen_addess in sshd_listen_addresses %}
+{% for listen_addess in aehostd_sshd_listen_addresses %}
 ListenAddress {{ listen_addess }}
 {% endfor %}
 {% endif %}
@@ -21,7 +21,7 @@ HostKey /etc/ssh/ssh_host_ecdsa_key
 
 # Logging
 SyslogFacility AUTH
-LogLevel {{ sshd_loglevel }}
+LogLevel {{ aehostd_sshd_loglevel }}
 
 # Authentication:
 LoginGraceTime 120
@@ -32,15 +32,15 @@ PubkeyAuthentication yes
 # find pre-installed SSH keys in fixed location for
 # - separately configured services
 # - root's emergency keys
-AuthorizedKeysFile {{ sshd_authorized_keys }}/%u
+AuthorizedKeysFile {{ aehostd_sshd_authorized_keys }}/%u
 # retrieve SSH keys loaded from AE-DIR from separate location
 # with different ownership
 AuthorizedKeysCommand /bin/cat '{{ aehostd_sshkeys_dir }}/%u'
 AuthorizedKeysCommandUser {{ aehostd_user }}
 
-{% if ssh_trusted_userca_keys %}
+{% if aehostd_sshd_trusted_userca_keys %}
 # File name of public keys trusted for signing user certs
-TrustedUserCAKeys {{ ssh_trusted_userca_keys }}
+TrustedUserCAKeys {{ aehostd_sshd_trusted_userca_keys }}
 {% endif %}
 
 # Don't read the user's ~/.rhosts and ~/.shosts files
@@ -76,9 +76,9 @@ TCPKeepAlive yes
 # Allow client to pass locale environment variables
 AcceptEnv LANG LC_*
 
-{% if ssh_sftp_server %}
+{% if aehostd_sshd_sftp_server %}
 # SFTP server to use
-Subsystem sftp {{ ssh_sftp_server }}
+Subsystem sftp {{ aehostd_sshd_sftp_server }}
 {% endif %}
 
 # Set this to 'yes' to enable PAM authentication, account processing,

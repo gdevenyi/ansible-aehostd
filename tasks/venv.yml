@@ -8,16 +8,16 @@
     state: latest
     virtualenv: "/opt/ae-dir"
     virtualenv_site_packages: no
-    virtualenv_command: "pyvenv"
+    virtualenv_command: "python3 -m venv"
 
-- name: "Additional PIP packages in virtualenv /opt/ae-dir on {{ lsb_id }}"
+- name: "Additional PIP packages in virtualenv /opt/ae-dir"
   pip:
     name:
       - pyasn1
       - pyasn1_modules
       - ldap0>=0.6.8
-      - aedir>=0.7.0
-      - aehostd>=0.11.4
+      - aedir>=0.8.5
+      - aehostd>=0.11.5
     state: latest
     virtualenv: "/opt/ae-dir"
   notify:

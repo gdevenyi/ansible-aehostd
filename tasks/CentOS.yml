@@ -1,6 +1,6 @@
 ---
 
-- name: "Install packages on {{ lsb_id }}"
+- name: "Install packages"
   yum:
     name:
       - aehostd-modules
@@ -8,5 +8,5 @@
     state: present
     update_cache: yes
 
-- name: "Install aehostd in {{ lsb_id }} in virtual env"
+- name: "Install aehostd in virtual env"
   include_tasks: "venv.yml"

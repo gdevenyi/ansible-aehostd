@@ -46,10 +46,10 @@ RestrictNamespaces=yes
 RestrictSUIDSGID=yes
 KeyringMode=private
 SystemCallArchitectures=native
-SystemCallFilter=~ madvise @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete @timer @privileged
+#SystemCallFilter=~ madvise @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete @timer @privileged
 RestrictAddressFamilies=AF_UNIX
 
-{% if apparmor_enabled %}
+{% if aehostd_apparmor_enabled %}
 #AppArmorProfile=aehostd-ph
 {% endif %}
 

@@ -4,9 +4,9 @@
 # SSH authorized keys
 #-----------------------------------------------------------------------
 
-- name: "Create directory for pre-installed SSH authorized keys {{ sshd_authorized_keys }}"
+- name: "Create directory for pre-installed SSH authorized keys {{ aehostd_sshd_authorized_keys }}"
   file:
-    path: "{{ sshd_authorized_keys }}"
+    path: "{{ aehostd_sshd_authorized_keys }}"
     state: directory
     owner: root
     group: root
@@ -14,40 +14,34 @@
 
 - name: "Install SSH emergency root key(s)"
   copy:
-    src: "{{ ssh_emergency_root_keys }}"
+    src: "{{ aehostd_sshd_emergency_root_keys }}"
     dest: "/etc/ssh/authorized_keys/root"
     owner: root
     group: root
     mode: 0640
+  when:
+    aehostd_sshd_emergency_root_keys != ""
 
 - name: "Install SSH trusted user CA key(s)"
   copy:
-    src: "{{ inventory_dir }}/files/{{ ssh_trusted_userca_keys|basename }}"
-    dest: "{{ ssh_trusted_userca_keys }}"
+    src: "{{ inventory_dir }}/files/{{ aehostd_sshd_trusted_userca_keys|basename }}"
+    dest: "{{ aehostd_sshd_trusted_userca_keys }}"
     owner: root
     group: root
     mode: 0640
   when:
-    ssh_trusted_userca_keys != ""
+    aehostd_sshd_trusted_userca_keys != ""
 
-# Install a NSS/PAM caching demon
-#-----------------------------------------------------------------------
-
-- name: "Install AE-DIR host demon for module {{ nsswitch_module }}"
+- name: "Install AE-DIR host demon for module {{ aehostd_nss_module }}"
   include_tasks: "aehostd.yml"
-
-- name: "Install name service caching demon (nscd)"
-  include_tasks: "nscd.yml"
-  when:
-    nscd_enabled == True
 
 # sshd, NSS and PAM configuration
 # these should be the last tasks!
 #-----------------------------------------------------------------------
 
-- name: "Install sshd_config based on {{ sshd_config_template }}"
+- name: "Install sshd_config based on {{ aehostd_sshd_config_template }}"
   template:
-    src: "{{ sshd_config_template }}"
+    src: "{{ aehostd_sshd_config_template }}"
     dest: "/etc/ssh/sshd_config"
     owner: root
     group: root
@@ -56,7 +50,10 @@
   notify: restart sshd
 
 - name: "ensure SSH demon is running"
-  service: name="{{ sshd_service_name }}" state=started enabled=yes
+  service:
+    name: "{{ aehostd_sshd_service_name }}"
+    state: started
+    enabled: yes
 
 - name: "Create nsswitch.conf"
   template:
@@ -66,7 +63,7 @@
     group: root
     mode: 0644
 
-- name: "Install PAM config files from {{ pam_template_dir }}/"
+- name: "Install PAM config files from {{ aehostd_pam_template_dir }}/"
   template:
     src: "{{ item }}"
     dest: "/etc/pam.d/{{ (item|basename)[:-3] }}"
@@ -74,7 +71,7 @@
     group: root
     mode: 0644
   with_fileglob:
-    "{{ pam_template_dir }}/*.j2"
+    "{{ aehostd_pam_template_dir }}/*.j2"
   tags:
     - pam
 
