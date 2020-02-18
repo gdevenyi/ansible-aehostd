@@ -1,5 +1,16 @@
 ---
-# tasks file for roles/ae-linux-login
+
+- name: "Disable and stop other NSS/PAM services"
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  ignore_errors: yes
+  with_items:
+    - sssd
+    - nslcd
+  notify:
+  - "restart aehostd"
 
 # SSH authorized keys
 #-----------------------------------------------------------------------
