@@ -45,8 +45,9 @@
     owner: root
     group: root
     mode: 0644
+  when: aehostd_cacert_filename != ""
   notify:
-  - "restart aehostd"
+    - "restart aehostd"
 
 - name: "Create {{ aehostd_conf_file }}"
   template:

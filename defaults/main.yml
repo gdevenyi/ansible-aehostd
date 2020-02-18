@@ -23,8 +23,10 @@ aehostd_max_uid: 65000
 aehostd_min_gid: 30000
 aehostd_max_gid: 65000
 
-# TLS files
+# source file containing all trusted CA certs file
+# (set to empty string to disable copy task)
 aehostd_cacert_filename: "cacert.pem"
+# full path name of the trusted CA certs file on the managed node
 aehostd_cacert_pathname: "/etc/ssl/{{ aehostd_cacert_filename|basename }}"
 
 # nested dict of OS-specific vars
