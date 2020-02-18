@@ -114,6 +114,16 @@
     mode: 0644
   notify:
     - "restart aehostd"
+
+- name: "Install tmpfiles config"
+  template:
+    src: "aehostd-tmpfiles.conf.j2"
+    dest: "/usr/lib/tmpfiles.d/aehostd.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - "restart aehostd"
   when: ansible_service_mgr == "systemd"
 
 - name: "Install systemd unit file for aehostd-ph"
