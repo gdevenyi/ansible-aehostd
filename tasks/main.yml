@@ -9,7 +9,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0750
+    mode: 0o0750
 
 - name: "Install SSH emergency root key(s)"
   copy:
@@ -17,7 +17,7 @@
     dest: "/etc/ssh/authorized_keys/root"
     owner: root
     group: root
-    mode: 0640
+    mode: 0o0640
   when:
     aehostd_sshd_emergency_root_keys != ""
 
@@ -27,7 +27,7 @@
     dest: "{{ aehostd_sshd_trusted_userca_keys }}"
     owner: root
     group: root
-    mode: 0640
+    mode: 0o0640
   when:
     aehostd_sshd_trusted_userca_keys != ""
 
@@ -44,7 +44,7 @@
     dest: "/etc/ssh/sshd_config"
     owner: root
     group: root
-    mode: 0640
+    mode: 0o0640
     validate: "/usr/sbin/sshd -t -f %s"
   notify: restart sshd
 
@@ -60,7 +60,7 @@
     dest: "/etc/nsswitch.conf"
     owner: root
     group: root
-    mode: 0644
+    mode: 0o0644
 
 - name: "Install PAM config files from {{ aehostd_pam_template_dir }}/"
   template:
@@ -68,7 +68,7 @@
     dest: "/etc/pam.d/{{ (item|basename)[:-3] }}"
     owner: root
     group: root
-    mode: 0644
+    mode: 0o0644
   with_fileglob:
     "{{ aehostd_pam_template_dir }}/*.j2"
   tags:
@@ -80,4 +80,4 @@
     dest: "/etc/sudoers"
     owner: root
     group: root
-    mode: 0440
+    mode: 0o0440

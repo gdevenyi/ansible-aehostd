@@ -44,7 +44,7 @@
     dest: "{{ aehostd_cacert_pathname }}"
     owner: root
     group: root
-    mode: 0644
+    mode: 0o0644
   when: aehostd_cacert_filename != ""
   notify:
     - "restart aehostd"
@@ -55,7 +55,7 @@
     dest: "{{ aehostd_conf_file }}"
     owner: root
     group: "{{ aehostd_group }}"
-    mode: 0640
+    mode: 0o0640
   notify:
     - "restart aehostd"
     - "restart aehostd-ph"
@@ -66,7 +66,7 @@
     state: directory
     owner: "{{ aehostd_user }}"
     group: "{{ aehostd_group }}"
-    mode: 0751
+    mode: 0o0751
   notify:
     - "restart aehostd"
 
@@ -76,7 +76,7 @@
     state: directory
     owner: "{{ aehostd_user }}"
     group: "{{ aehostd_group }}"
-    mode: 0750
+    mode: 0o0750
   with_items:
     - "{{ aehostd_db_dir }}"
     - "{{ aehostd_sshkeys_dir }}"
@@ -89,7 +89,7 @@
     state: directory
     owner: "{{ aehostd_user }}"
     group: "{{ aehostd_group }}"
-    mode: 0755
+    mode: 0o0755
   with_items:
     - "{{ aehostd_pid_file|dirname }}"
     - "{{ aehostd_socket|dirname }}"
@@ -102,7 +102,7 @@
     dest: "{{ aehostd_pw_file }}"
     owner: "{{ aehostd_user }}"
     group: "{{ aehostd_group }}"
-    mode: 0640
+    mode: 0o0640
   no_log: True
   when: ldap_host_password is defined and ldap_host_password != ""
   notify:
@@ -113,7 +113,7 @@
     path: "{{ aehostd_pw_file }}"
     owner: "{{ aehostd_user }}"
     group: "{{ aehostd_group }}"
-    mode: 0640
+    mode: 0o0640
   ignore_errors: yes
   notify:
     - "restart aehostd"
@@ -124,7 +124,7 @@
     dest: "/etc/systemd/system/aehostd.service"
     owner: root
     group: root
-    mode: 0644
+    mode: 0o0644
   notify:
     - "restart aehostd"
 
@@ -134,7 +134,7 @@
     dest: "/usr/lib/tmpfiles.d/aehostd.conf"
     owner: root
     group: root
-    mode: 0644
+    mode: 0o0644
   notify:
     - "restart aehostd"
 
@@ -144,7 +144,7 @@
     dest: "/etc/systemd/system/aehostd-ph.service"
     owner: root
     group: root
-    mode: 0644
+    mode: 0o0644
   notify:
     - "restart aehostd-ph"
   when: ansible_service_mgr == "systemd"
