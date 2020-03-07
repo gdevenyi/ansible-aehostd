@@ -123,6 +123,10 @@ aehostd_pam_template_dir: "{{ role_path }}/templates/{{ aehostd_lsb_id }}"
 # LDAP search filter for PAM authorization
 #-----------------------------------------
 
+# Cache TTL (seconds) of PAM authc results
+# Default: -1 (disabled)
+aehostd_pam_authc_cache_ttl: -1
+
 # allow only active users with explicit login rights in AE-DIR
 # (note: AE-DIR already does this implicit via visibility of aeUser entries)
 aehostd_pam_authz_search: "(&(uid={username})(|(pwdChangedTime=*)(userCertificate=*)(sshPublicKey=*)))"

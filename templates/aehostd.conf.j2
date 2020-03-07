@@ -183,6 +183,11 @@ sudoers_includedir = /etc/sudoers.d
 
 # PAM parameters
 #-------------------------------------------
+
+# Cache TTL (seconds) of PAM authc results
+# Default: -1 (disabled)
+pam_authc_cache_ttl = {{ aehostd_pam_authc_cache_ttl }}
+
 # LDAP filter template used for checking authorization of a user
 pam_authz_search = {{ aehostd_pam_authz_search }}
 
