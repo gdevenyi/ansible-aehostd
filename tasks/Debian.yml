@@ -17,5 +17,45 @@
     install_recommends: no
     dpkg_options: 'force-confold,force-confdef'
 
+- block:
+
+  - name: "Check whether all C wrapper modules are installed"
+    command: "{{ aehostd_python }} -c 'import ldap0'"
+    ignore_errors: yes
+    register: ldap0_installed
+
+  - name: "Install C compiler packages"
+    apt:
+      name:
+        - gcc
+        - libssl-dev
+        - libsasl2-dev
+        - libldap-dev
+        - python3-dev
+        - libpython3-dev
+        - libffi-dev
+      state: present
+      update_cache: no
+      install_recommends: no
+      dpkg_options: 'force-confold,force-confdef'
+    when: ldap0_installed.rc != 0
+
+  when: aehostd_pip_needs_compiler==True
+
 - name: "Install aehostd in virtual env"
   include_tasks: "venv.yml"
+
+- name: "Uninstall C compiler packages"
+  apt:
+    name:
+      - gcc
+      - libssl-dev
+      - libsasl2-dev
+      - libldap-dev
+      - python3-dev
+      - libpython3-dev
+      - libffi-dev
+    state: absent
+    autoremove: yes
+    update_cache: no
+    dpkg_options: 'force-confold,force-confdef'

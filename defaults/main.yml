@@ -135,6 +135,12 @@ aehostd_pam_authz_search: "(&(uid={username})(|(pwdChangedTime=*)(userCertificat
 # Python virtual env parameters
 #---------------------------------------------------------------------------
 
+# PyPI index to use for PIP installation
+aehostd_pip_index_url: 'https://pypi.python.org/simple'
+
+# whether C compiler is needed for PIP installation
+aehostd_pip_needs_compiler: "{{ aehostd_pip_index_url == 'https://pypi.python.org/simple' }}"
+
 # directory name for virtual env (used on Debian and CentOS)
 aehostd_venv_path: "/opt/aehostd"
 
@@ -144,7 +150,7 @@ aehostd_venv_command: "/usr/bin/python3 -m venv"
 # list of extra arguments for PIP installation
 aehostd_pip_args:
   - "--upgrade"
-  - "--index-url https://pypi.python.org/simple"
+  - "--index-url {{ aehostd_pip_index_url }}"
 
 #---------------------------------------------------------------------------
 # AppArmor parameters
