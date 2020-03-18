@@ -21,7 +21,9 @@ for the various openSUSE and SLE versions.
 
 The appropriate download repo has to be added before like this:
 
-   zypper addrepo -f https://download.opensuse.org/repositories/home:/stroeder:/iam/openSUSE_Tumbleweed/
+```
+zypper addrepo -f https://download.opensuse.org/repositories/home:/stroeder:/iam/openSUSE_Tumbleweed/
+```
 
 See also: [List of zypper repos](https://download.opensuse.org/repositories/home:/stroeder:/iam/)
 
