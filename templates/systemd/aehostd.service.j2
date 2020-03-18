@@ -27,7 +27,7 @@ Environment=PYTHONOPTIMIZE=2
 # avoid to accidentially write Python byte code
 Environment=PYTHONDONTWRITEBYTECODE=1
 Environment=PYTHONWARNINGS=error
-ExecStart={{ aedir_python }} -m aehostd.srv --no-fork --pid {{ aehostd_pid_file }} --config {{ aehostd_conf_file }}
+ExecStart={{ aehostd_python }} -m aehostd.srv --no-fork --pid {{ aehostd_pid_file }} --config {{ aehostd_conf_file }}
 Restart=always
 StandardError=syslog
 # various hardening options

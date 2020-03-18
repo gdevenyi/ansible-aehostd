@@ -13,7 +13,7 @@
     - sssd
     - nslcd
   notify:
-  - "restart aehostd"
+    - "restart aehostd services"
 
 - name: "Add local system group {{ aehostd_group }}"
   group:
@@ -22,7 +22,7 @@
     state: present
     system: yes
   notify:
-  - "restart aehostd"
+    - "restart aehostd"
 
 - name: "Add local system account {{ aehostd_user }}"
   user:
@@ -36,7 +36,7 @@
     createhome: no
     non_unique: no
   notify:
-  - "restart aehostd"
+    - "restart aehostd"
 
 - name: "CA certificate file {{ aehostd_cacert_pathname }}"
   copy:
@@ -58,7 +58,6 @@
     mode: 0o0640
   notify:
     - "restart aehostd"
-    - "restart aehostd-ph"
 
 - name: "Create directory {{ aehostd_lib_dir }}"
   file:
@@ -120,7 +119,7 @@
 
 - name: "Install systemd unit file for aehostd"
   template:
-    src: "aehostd.service.j2"
+    src: "systemd/aehostd.service.j2"
     dest: "/etc/systemd/system/aehostd.service"
     owner: root
     group: root
@@ -136,11 +135,11 @@
     group: root
     mode: 0o0644
   notify:
-    - "restart aehostd"
+    - "restart aehostd services"
 
 - name: "Install systemd unit file for aehostd-ph"
   template:
-    src: "aehostd-ph.service.j2"
+    src: "systemd/aehostd-ph.service.j2"
     dest: "/etc/systemd/system/aehostd-ph.service"
     owner: root
     group: root

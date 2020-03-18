@@ -34,11 +34,11 @@ aehostd_os_vars:
   CentOS:
     sshd_service_name: "sshd"
     ssh_lib_dir: "/usr/libexec/openssh"
-    python: "/opt/ae-dir/bin/python3"
+    python: "{{ aehostd_venv_path }}/bin/python3"
   Debian:
     sshd_service_name: "ssh"
     ssh_lib_dir: "/usr/lib/openssh"
-    python: "/opt/ae-dir/bin/python3"
+    python: "{{ aehostd_venv_path }}/bin/python3"
   SUSE:
     sshd_service_name: "sshd"
     ssh_lib_dir: "/usr/lib/ssh"
@@ -63,7 +63,7 @@ aehostd_gid: "{{ aehostd_uid }}"
 aehostd_loglevel: "20"
 
 # Python interpreter
-aedir_python: "{{ aehostd_os_vars[aehostd_lsb_id].python }} -ROOBs"
+aehostd_python: "{{ aehostd_os_vars[aehostd_lsb_id].python }} -ROOBs"
 
 # Pathnames of aehostd's files and directories
 aehostd_conf_file: "/etc/aehostd.conf"
@@ -130,6 +130,21 @@ aehostd_pam_authc_cache_ttl: -1
 # allow only active users with explicit login rights in AE-DIR
 # (note: AE-DIR already does this implicit via visibility of aeUser entries)
 aehostd_pam_authz_search: "(&(uid={username})(|(pwdChangedTime=*)(userCertificate=*)(sshPublicKey=*)))"
+
+#---------------------------------------------------------------------------
+# Python virtual env parameters
+#---------------------------------------------------------------------------
+
+# directory name for virtual env (used on Debian and CentOS)
+aehostd_venv_path: "/opt/aehostd"
+
+# command used to create virtual env
+aehostd_venv_command: "/usr/bin/python3 -m venv"
+
+# list of extra arguments for PIP installation
+aehostd_pip_args:
+  - "--upgrade"
+  - "--index-url https://pypi.python.org/simple"
 
 #---------------------------------------------------------------------------
 # AppArmor parameters

@@ -4,6 +4,7 @@
 - name: "restart aehostd"
   listen:
     - "restart aehostd"
+    - "restart aehostd services"
   service:
     name: "aehostd"
     state: restarted
@@ -11,6 +12,7 @@
 - name: "restart aehostd-ph"
   listen:
     - "restart aehostd-ph"
+    - "restart aehostd services"
   service:
     name: "aehostd-ph"
     state: restarted

@@ -6,9 +6,10 @@
       - pip
       - setuptools
     state: latest
-    virtualenv: "/opt/ae-dir"
+    virtualenv: "{{ aehostd_venv_path }}"
     virtualenv_site_packages: no
-    virtualenv_command: "python3 -m venv"
+    virtualenv_command: "{{ aehostd_venv_command }}"
+    extra_args: "{{ aehostd_pip_args|join(' ') }}"
 
 - name: "Additional PIP packages in virtualenv /opt/ae-dir"
   pip:
@@ -19,6 +20,7 @@
       - aedir>=0.8.5
       - aehostd>=1.0.0
     state: latest
-    virtualenv: "/opt/ae-dir"
+    virtualenv: "{{ aehostd_venv_path }}"
+    extra_args: "{{ aehostd_pip_args|join(' ') }}"
   notify:
-    - restart aehostd
+    - "restart aehostd services"
