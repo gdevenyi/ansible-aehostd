@@ -11,6 +11,9 @@
 # non-interactive
 #
 session	required	pam_limits.so
+{% if aehostd_pam_mkhomedir_args %}
+session	required	pam_mkhomedir.so {{ aehostd_pam_mkhomedir_args }}
+{% endif %}
 session	sufficient	{{ aehostd_pam_module }}	minimum_uid={{ aehostd_min_uid }}
 session	required	pam_unix.so
 session	optional	pam_umask.so

@@ -120,6 +120,10 @@ aehostd_sshd_trusted_userca_keys: ""
 # for creating PAM config files /etc/pam.d/common-*
 aehostd_pam_template_dir: "{{ role_path }}/templates/{{ aehostd_lsb_id }}"
 
+# Arguments used by pam_mkhomedir for automatic creation of user's home directory
+# (empty string disables use of pam_mkhomedir)
+aehostd_pam_mkhomedir_args: ""
+
 # LDAP search filter for PAM authorization
 #-----------------------------------------
 
