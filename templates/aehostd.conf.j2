@@ -51,12 +51,18 @@ socketpath = {{ aehostd_socket }}
 # List of LDAP servers (LDAP URIs) to try first in exactly this order
 # no matter what is configured in uri_pool.
 # Default: empty list.
-uri_list = {{ aehostd_uri_list|join(' ') }}
+uri_list =
+{% for ldap_uri in aehostd_uri_list %}
+  {{ ldap_uri }}
+{% endfor %}
 
 # List of LDAP servers (LDAP URIs) to try after all LDAP URIs defined with uri_list failed.
 # This list gets rotated based on hosts's canonical FQDN for client-side load-balancing.
 # Default: empty list.
-uri_pool = {{ aehostd_uri_pool|join(' ') }}
+uri_pool =
+{% for ldap_uri in aehostd_uri_pool %}
+  {{ ldap_uri }}
+{% endfor %}
 
 # The bind-DN to use when binding as service to AE-DIR with simple bind.
 # Preferrably the short bind-DN should be used.
