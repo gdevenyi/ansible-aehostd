@@ -131,6 +131,12 @@ aehostd_pam_mkhomedir_args: ""
 # Default: -1 (disabled)
 aehostd_pam_authc_cache_ttl: -1
 
+# PAM request attributes to be used for caching of PAM authc results
+# (e.g. add 'rhost' to pin cache entry to remote IP address)
+aehostd_pam_authc_cache_attrs:
+  - username
+  - password
+
 # allow only active users with explicit login rights in AE-DIR
 # (note: AE-DIR already does this implicit via visibility of aeUser entries)
 aehostd_pam_authz_search: "(&(uid={username})(|(pwdChangedTime=*)(userCertificate=*)(sshPublicKey=*)))"
