@@ -8,7 +8,7 @@
       - python3-lockfile
       - python3-python-daemon
       - aehostd-modules
-      - "aehostd >= 1.1.5"
+      - "aehostd >= 1.1.6"
       - sudo
     state: latest
     disable_recommends: yes
