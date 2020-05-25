@@ -27,6 +27,7 @@ Environment=PYTHONWARNINGS=error
 ExecStart={{ aehostd_python }} -m aehostd.priv --no-fork --pid {{ aehostd_pid_file|dirname }}/aehostd-ph.pid --config {{ aehostd_conf_file }}
 Restart=always
 StandardError=syslog
+UMask=027
 # various hardening options
 CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
 AmbientCapabilities=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
@@ -51,8 +52,10 @@ RestrictRealtime=yes
 RestrictNamespaces=yes
 RestrictSUIDSGID=yes
 KeyringMode=private
+MemoryDenyWriteExecute=yes
+RemoveIPC=yes
 SystemCallArchitectures=native
-#SystemCallFilter=~ madvise @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete @timer @privileged
+#SystemCallFilter=~ madvise @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete @timer @privileged @resources
 RestrictAddressFamilies=AF_UNIX
 
 {% if aehostd_apparmor_enabled %}
