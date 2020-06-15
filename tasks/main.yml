@@ -87,6 +87,9 @@
   - name: "Init aeHost entry"
     aehost:
       ldapurl: "{{ aehostd_init_ldapurl }}"
+      cacert: "{{ aehostd_cacert_filename }}"
+      clcert: "{{ aehostd_cl_filename|default(omit) }}"
+      clkey: "{{ aehostd_cl_filename|default(omit) }}"
       binddn: "uid={{ aehostd_init_admin|default(ansible_user) }},{{ aehostd_searchbase }}"
       bindpw: "{{ aehostd_init_adminpw }}"
       name: "{{ inventory_hostname }}"

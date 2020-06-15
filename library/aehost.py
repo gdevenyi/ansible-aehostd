@@ -80,10 +80,6 @@ options:
         description:
             - Purpose description of aeHost object
         required: false
-    ldapurl:
-        description:
-            - LDAP URI of Æ-DIR server (default ldapi://%2Fopt%2Fae-dir%2Frun%2Fslapd%2Fldapi)
-        required: false
     ticket_id:
         description:
             - Value for attribute aeTicketId
@@ -91,6 +87,22 @@ options:
     ppolicy:
         description:
             - DN of the pwdPolicySubentry entry (default cn=ppolicy-systems,cn=ae,<aedir_suffix>)
+        required: false
+    ldapurl:
+        description:
+            - LDAP URI of Æ-DIR server (default ldapi://%2Fopt%2Fae-dir%2Frun%2Fslapd%2Fldapi)
+        required: false
+    cacert:
+        description:
+            - Path name of trusted CA certificate bundle file.
+        required: false
+    clcert:
+        description:
+            - Path name of client certificate to be used for SASL/EXTERNAL bind.
+        required: false
+    clkey:
+        description:
+            - Path name of client key to be used for SASL/EXTERNAL bind.
         required: false
 
 author:
@@ -127,6 +139,9 @@ def get_module_args():
         ),
         binddn=dict(type='str', required=False),
         bindpw=dict(type='str', required=False),
+        cacert=dict(type='str', required=False),
+        clcert=dict(type='str', required=False),
+        clkey=dict(type='str', required=False),
         # general arguments
         name=dict(type='str', required=True),
         state=dict(
@@ -177,6 +192,9 @@ def main():
             module.params['ldapurl'],
             who=module.params['binddn'],
             cred=module.params['bindpw'],
+            cacert_filename=module.params['cacert'],
+            client_cert_filename=module.params['clcert'],
+            client_key_filename=module.params['clkey'],
         )
     except LDAPError as ldap_err:
         module.fail_json(msg='Error connecting to %r: %s' % (module.params['ldapurl'], ldap_err))
