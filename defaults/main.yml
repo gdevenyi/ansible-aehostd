@@ -23,9 +23,6 @@ aehostd_aehost_state: "present"
 # Password of admin aeUser account used for creating aeHost entry
 #aehostd_init_adminpw: ""
 
-ansible_python_interpreter: "{{ aehostd_main_provider_python }}"
-delegate_to: "{{ aehostd_main_provider_hostname }}"
-
 # LDAPS URIs of primary AE-DIR servers (e.g. in same data center)
 aehostd_uri_list: []
 
