@@ -81,3 +81,55 @@
     owner: root
     group: root
     mode: 0o0440
+
+- block:
+
+  - name: "Init aeHost entry"
+    aehost:
+      ldapurl: "{{ aehostd_init_ldapurl }}"
+      binddn: "uid={{ aehostd_init_admin|default(ansible_user) }},{{ aehostd_searchbase }}"
+      bindpw: "{{ aehostd_init_adminpw }}"
+      name: "{{ inventory_hostname }}"
+      state: "{{ aehostd_aehost_state }}"
+      srvgroup: "{{ aehostd_srvgroup }}"
+      srvgroups: "{{ aehostd_srvgroups|default(omit) }}"
+      description: "{{ aehostd_aehost_description|default(omit) }}"
+      ticket_id: "{{ aehostd_aehost_ticket_id|default(omit) }}"
+      ppolicy: "{{ aehostd_aehost_ppolicy|default(omit) }}"
+    delegate_to: "127.0.0.1"
+    become: no
+    register: aehost_result
+
+  - block:
+
+    - name: "Wait for replication of changes"
+      pause:
+        seconds: 5
+      when: aehost_result.changed
+
+    - name: "Init aehostd with a SSH ping"
+      connection: "ssh"
+      remote_user: "aehost-init"
+      vars:
+        ansible_password: "{{ aehost_result.password }}"
+        ansible_ssh_args: "-o PasswordAuthentication=yes -o RequestTTY=no -o PreferredAuthentications=password"
+      ping:
+        data: "pong"
+      become: no
+      ignore_unreachable: yes
+
+    - name: "Wait aehostd refresh"
+      pause:
+        seconds: 6
+
+    - name: "Normal SSH ping"
+      ping:
+        data: "pong"
+      become: no
+
+    when: aehost_result.changed and aehost_result.password
+
+  when: aehostd_init_ldapurl is defined
+
+  tags:
+    - aedir_init

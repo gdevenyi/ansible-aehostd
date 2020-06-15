@@ -8,6 +8,24 @@ aehostd_lsb_id_map:
 # LSB id to be used during plays
 aehostd_lsb_id: "{{ aehostd_lsb_id_map.get(ansible_lsb.id,ansible_lsb.id) }}"
 
+# state value passed to aehost: task
+aehostd_aehost_state: "present"
+
+# name primary host group (aeSrvGroup)
+#aehostd_srvgroup: "test-hosts"
+
+# LDAP URL where to connect for creating aeHost entry
+#aehostd_init_ldapurl: "ldaps://ae-dir-provider-1.example.com"
+
+# User name of admin aeUser account used for creating aeHost entry
+#aehostd_init_admin: "xkcd"
+
+# Password of admin aeUser account used for creating aeHost entry
+#aehostd_init_adminpw: ""
+
+ansible_python_interpreter: "{{ aehostd_main_provider_python }}"
+delegate_to: "{{ aehostd_main_provider_hostname }}"
+
 # LDAPS URIs of primary AE-DIR servers (e.g. in same data center)
 aehostd_uri_list: []
 
