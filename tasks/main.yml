@@ -11,13 +11,28 @@
     group: root
     mode: 0o0750
 
-- name: "Install SSH emergency root key(s)"
-  copy:
-    src: "{{ aehostd_sshd_emergency_root_keys }}"
-    dest: "/etc/ssh/authorized_keys/root"
-    owner: root
-    group: root
-    mode: 0o0640
+- name: "Setup SSH emergency root key(s)"
+  block:
+
+    - name: "Check {{ aehostd_sshd_emergency_root_keys }} is a single file"
+      stat:
+        path: "{{ aehostd_sshd_emergency_root_keys }}"
+      delegate_to: localhost
+      register: stat_erk_result
+  
+    - fail:
+        msg: "{{ aehostd_sshd_emergency_root_keys }} must be a single file containing the root emergency keys."
+      when:
+        stat_erk_result.stat.exists and stat_erk_result.stat.isdir
+  
+    - name: "Install SSH emergency root key(s)"
+      copy:
+        src: "{{ aehostd_sshd_emergency_root_keys }}"
+        dest: "/etc/ssh/authorized_keys/root"
+        owner: root
+        group: root
+        mode: 0o0640
+
   when:
     aehostd_sshd_emergency_root_keys != ""
 
