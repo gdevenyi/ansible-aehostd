@@ -11,7 +11,7 @@
     group: root
     mode: 0o0750
 
-- name: "Setup SSH emergency rootk key(s)"
+- name: "Setup SSH emergency root key(s)"
   block:
 
     - name: "Check {{ aehostd_sshd_emergency_root_keys }} is a single file"
