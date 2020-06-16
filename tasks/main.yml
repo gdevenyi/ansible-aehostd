@@ -11,7 +11,7 @@
     group: root
     mode: 0o0750
 
-- name: "Create emergency root authroized keys file"
+- name: "Create emergency root authorized key(s) file"
   file:
     path: "{{ aehostd_sshd_authorized_keys }}/root"
     state: touch
@@ -23,7 +23,7 @@
 
 - name: "Install SSH emergency root key(s)"
   blockinfile:
-      path: "{{ aehostd_sshd_emergency_root_keys }}/root"
+      path: "{{ aehostd_sshd_authorized_keys }}/root"
       block: "{{ lookup('file', item) }}"
   with_fileglob: "{{ aehostd_sshd_emergency_root_keys }}/*"
   when:
