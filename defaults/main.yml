@@ -23,13 +23,14 @@ aehostd_aehost_state: "present"
 # Password of admin aeUser account used for creating aeHost entry
 #aehostd_init_adminpw: ""
 
-# LDAPS URIs of primary AE-DIR servers (e.g. in same data center)
+# LDAPS URIs of preferred AE-DIR servers used in this order
 aehostd_uri_list: []
 
-# LDAPS URIs of backup AE-DIR servers (e.g. in other data center)
+# LDAPS URIs of AE-DIR servers used with client-side load-balancing
 aehostd_uri_pool: []
 
-# search base to use
+# search base to use for constructing a the host's bind-DN
+# must match aedir_suffix of ansible role aedir_server
 aehostd_searchbase: "ou=ae-dir"
 
 # POSIX-UID number range served by LDAP server
