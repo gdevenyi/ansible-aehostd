@@ -11,13 +11,21 @@
     group: root
     mode: 0o0750
 
-- name: "Install SSH emergency root key(s)"
-  copy:
-    src: "{{ aehostd_sshd_emergency_root_keys }}"
-    dest: "/etc/ssh/authorized_keys/root"
+- name: "Create emergency root authroized keys file"
+  file:
+    path: "{{ aehostd_sshd_authorized_keys }}/root"
+    state: touch
     owner: root
     group: root
     mode: 0o0640
+  when:
+    aehostd_sshd_emergency_root_keys != ""
+
+- name: "Install SSH emergency root key(s)"
+  blockinfile:
+      path: "{{ aehostd_sshd_emergency_root_keys }}/root"
+      block: "{{ lookup('file', item) }}"
+  with_fileglob: "{{ aehostd_sshd_emergency_root_keys }}/*"
   when:
     aehostd_sshd_emergency_root_keys != ""
 
