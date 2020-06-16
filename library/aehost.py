@@ -48,10 +48,10 @@ DOCUMENTATION = '''
 ---
 module: aehost
 
-short_description: Create or update an aeHost entry
+short_description: Create or update an aeHost entries in Æ-DIR
 
 description:
-    - "This module creates/updates aeHost entries"
+    - "This module creates/updates aeHost entries in Æ-DIR"
 
 options:
     name:
@@ -67,15 +67,16 @@ options:
     host:
         description:
             - Fully-qualified domain name to put in attribute 'host'
-        required: true
+        required: false
     srvgroup:
         description:
             - name of parent aeSrvGroup entry
         required: true
     srvgroups:
         description:
-            - names of supplemental aeSrvGroup entries
-        required: true
+            - names of supplemental aeSrvGroup entries to be added
+              to attribute aeSrvGroup in aeHost entry
+        required: false
     description:
         description:
             - Purpose description of aeHost object
@@ -86,7 +87,8 @@ options:
         required: false
     ppolicy:
         description:
-            - DN of the pwdPolicySubentry entry (default cn=ppolicy-systems,cn=ae,<aedir_suffix>)
+            - DN to put in attribute pwdPolicySubentry
+              (default cn=ppolicy-systems,cn=ae,<aeRoot>)
         required: false
     ldapurl:
         description:
