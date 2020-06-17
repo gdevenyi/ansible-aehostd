@@ -113,6 +113,13 @@ aehostd_homedir_tmpl: ""
 # service name of SSH demon
 aehostd_sshd_service_name: "{{ aehostd_os_vars[aehostd_lsb_id].sshd_service_name }}"
 
+# other services to stop, e.g. when migrating from other NSS/PAM services
+#aehostd_stop_services:
+#    - nscd
+#    - sssd
+#    - nslcd
+aehostd_stop_services: []
+
 # which SFTP server to use (disable completely with empty string)
 #sshd_sftp_server: "{{ aehostd_os_vars[aehostd_lsb_id].ssh_lib_dir }}/sftp-server"
 aehostd_sshd_sftp_server: "internal-sftp"

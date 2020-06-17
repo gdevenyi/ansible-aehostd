@@ -3,15 +3,13 @@
 - name: "Install aehostd"
   include_tasks: "{{ aehostd_lsb_id }}.yml"
 
-- name: "Disable and stop other NSS/PAM services"
+- name: "Disable and stop other services"
   service:
     name: "{{ item }}"
     state: stopped
     enabled: no
   ignore_errors: yes
-  with_items:
-    - sssd
-    - nslcd
+  with_items: "{{ aehostd_stop_services }}"
   notify:
     - "restart aehostd services"
 
