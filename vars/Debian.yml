@@ -1,0 +1,7 @@
+---
+# specific vars for Debian
+
+aehostd_package_repos:
+  "AE-DIR":
+    repo: "deb https://ae-dir.com/repo/debian/ {{ ansible_lsb.codename }} main"
+    key: "AE-DIR-project.gpg.key"

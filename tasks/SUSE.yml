@@ -1,5 +1,22 @@
 ---
 
+- name: "Add zypper repos for {{ ansible_lsb.description }}"
+  zypper_repository:
+    state: present
+    enabled: yes
+    overwrite_multiple: yes
+    auto_import_keys: yes
+    autorefresh: yes
+    name: "{{ item.key }}"
+    repo: "{{ item.value.repo }}"
+    priority: 90
+  with_dict: "{{ aehostd_pkg_repos }}"
+
+- name: "Refresh all repos on {{ ansible_lsb.description }}"
+  zypper_repository:
+    repo: '*'
+    runrefresh: yes
+
 - name: "Install packages"
   zypper:
     name:

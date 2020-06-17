@@ -5,6 +5,9 @@
 aehostd_lsb_id_map:
   openSUSE: "SUSE"
 
+# Dictionary defining additional OS package repos
+aehostd_pkg_repos: "{{ aehostd_package_repos }}"
+
 # LSB id to be used during plays
 aehostd_lsb_id: "{{ aehostd_lsb_id_map.get(ansible_lsb.id,ansible_lsb.id) }}"
 

@@ -3,6 +3,12 @@
 # SSH authorized keys
 #-----------------------------------------------------------------------
 
+- name: "Include OS-specific variables"
+  include_vars:
+    file: "{{ aehostd_lsb_id }}.yml"
+  tags:
+    - always
+
 - name: "Create directory for pre-installed SSH authorized keys {{ aehostd_sshd_authorized_keys }}"
   file:
     path: "{{ aehostd_sshd_authorized_keys }}"
