@@ -18,10 +18,12 @@ aehostd_aehost_state: "present"
 #aehostd_init_ldapurl: "ldaps://ae-dir-provider-1.example.com"
 
 # User name of admin aeUser account used for creating aeHost entry
-#aehostd_init_admin: "xkcd"
+# if not defined the playbook interactively asks for it
+#aehostd_setup_admin: "xkcd"
 
 # Password of admin aeUser account used for creating aeHost entry
-#aehostd_init_adminpw: ""
+# if not defined the playbook interactively asks for it
+#aehostd_setup_adminpw: ""
 
 # LDAPS URIs of preferred AE-DIR servers used in this order
 aehostd_uri_list: []
