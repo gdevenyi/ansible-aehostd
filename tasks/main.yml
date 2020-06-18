@@ -113,7 +113,7 @@
 
     - name: "Wait for replication of changes"
       pause:
-        seconds: 5
+        seconds: "{{ aehostd_replication_wait }}"
       when: aehost_result.changed
 
     - name: "Init aehostd with a SSH ping"
@@ -129,7 +129,7 @@
 
     - name: "Wait aehostd refresh"
       pause:
-        seconds: 6
+        seconds: "{{ aehostd_init_wait }}"
 
     - name: "Normal SSH ping"
       ping:

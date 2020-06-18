@@ -28,6 +28,14 @@ aehostd_aehost_state: "present"
 # if not defined the playbook interactively asks for it
 #aehostd_setup_adminpw: ""
 
+# time in seconds to wait for LDAP operations to be replicated
+# before proceeding with next tasks
+aehostd_replication_wait: 5
+
+# time in seconds to wait for refresh after SSH aehost-init pseudo-login
+# before proceeding with next tasks
+aehostd_init_wait: 5
+
 # LDAPS URIs of preferred AE-DIR servers used in this order
 aehostd_uri_list: []
 
