@@ -27,6 +27,9 @@ LogLevel {{ aehostd_sshd_loglevel }}
 # Authentication
 #---------------------------------------------------------------------------
 
+# this must be set to yes, otherwise aehost-init does not work
+UsePAM yes
+
 LoginGraceTime 120
 PermitRootLogin yes
 StrictModes yes
@@ -84,6 +87,8 @@ Subsystem sftp {{ aehostd_sshd_sftp_server }}
 #---------------------------------------------------------------------------
 
 # for aehostd's password initialization via PAM pseudo login
+# authentication is limited to password authentication
 Match User aehost-init
+    PubkeyAuthentication no
     PasswordAuthentication yes
     AuthenticationMethods password
