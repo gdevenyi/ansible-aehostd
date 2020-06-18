@@ -100,7 +100,7 @@
       bindpw: "{{ aehostd_setup_adminpw }}"
       name: "{{ inventory_hostname }}"
       state: "{{ aehostd_aehost_state }}"
-      srvgroup: "{{ aehostd_srvgroup }}"
+      srvgroup: "{{ aehostd_srvgroup|default(omit) }}"
       srvgroups: "{{ aehostd_srvgroups|default(omit) }}"
       description: "{{ aehostd_aehost_description|default(omit) }}"
       ticket_id: "{{ aehostd_aehost_ticket_id|default(omit) }}"

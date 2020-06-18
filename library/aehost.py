@@ -70,8 +70,9 @@ options:
         required: false
     srvgroup:
         description:
-            - name of parent aeSrvGroup entry
-        required: true
+            - Name of parent aeSrvGroup entry beneath which to add new aeHost entry.
+              If not set an existing aeHost entry will be searched.
+        required: false
     srvgroups:
         description:
             - names of supplemental aeSrvGroup entries to be added
@@ -159,7 +160,7 @@ def get_module_args():
             type='str'
         ),
         host=dict(type='str', required=False),
-        srvgroup=dict(type='str', required=True),
+        srvgroup=dict(type='str', required=False),
         srvgroups=dict(type='list', default=[], required=False),
         object_classes=dict(type='list', default=list(AEHost.__object_classes__), required=False),
     )
@@ -207,7 +208,11 @@ def main():
     if module.params['ppolicy'] is None:
         module.params['ppolicy'] = 'cn=ppolicy-systems,cn=ae,'+ldap_conn.search_base
 
-    ae_srvgroup = ldap_conn.find_aesrvgroup(module.params['srvgroup'])
+    if module.params['srvgroup'] is None:
+        parent_dn = ldap_conn.find_aehost(module.params['host']).dn_o.parent()
+    else:
+        ae_srvgroup = ldap_conn.find_aesrvgroup(module.params['srvgroup'])
+        parent_dn = ae_srvgroup.dn_o
 
     if module.params['srvgroups']:
         srv_groups_filter = '(&(objectClass=aeSrvGroup)(|{0}))'.format(
@@ -240,7 +245,7 @@ def main():
         srv_groups = []
 
     ae_host = AEHost(
-        parent_dn=ae_srvgroup.dn_o,
+        parent_dn=parent_dn,
         objectClass=set(module.params['object_classes']),
         cn=module.params['name'],
         host=module.params['host'],
