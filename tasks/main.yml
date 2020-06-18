@@ -92,7 +92,7 @@
 
   - name: "Init aeHost entry"
     aehost:
-      ldapurl: "{{ aehostd_init_ldapurl }}"
+      ldapurl: "{{ aehostd_setup_ldapurl }}"
       cacert: "{{ aehostd_cacert_filename }}"
       clcert: "{{ aehostd_cl_filename|default(omit) }}"
       clkey: "{{ aehostd_cl_filename|default(omit) }}"
@@ -138,7 +138,7 @@
 
     when: aehost_result.changed and aehost_result.password
 
-  when: aehostd_init_ldapurl is defined
+  when: aehostd_setup_ldapurl is defined
 
   tags:
     - aedir_init

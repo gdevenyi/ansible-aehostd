@@ -17,8 +17,8 @@ aehostd_aehost_state: "present"
 # name primary host group (aeSrvGroup)
 #aehostd_srvgroup: "test-hosts"
 
-# LDAP URL where to connect for creating aeHost entry
-#aehostd_init_ldapurl: "ldaps://ae-dir-provider-1.example.com"
+# LDAP URL where to connect as setup admin for creating aeHost entry
+#aehostd_setup_ldapurl: "ldaps://ae-dir-provider-1.example.com"
 
 # User name of admin aeUser account used for creating aeHost entry
 # if not defined the playbook interactively asks for it
