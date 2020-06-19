@@ -18,6 +18,7 @@
   apt:
     name:
       - sudo
+      - python3-venv
     state: present
     update_cache: no
     install_recommends: no
