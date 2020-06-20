@@ -28,6 +28,10 @@ aehostd_aehost_state: "present"
 # if not defined the playbook interactively asks for it
 #aehostd_setup_adminpw: ""
 
+# If set to yes, the aehost task interactively asks for the
+# OTP part used for binding as setup admin
+aehostd_setup_askotp: "no"
+
 # time in seconds to wait for LDAP operations to be replicated
 # before proceeding with next tasks
 aehostd_replication_wait: 5

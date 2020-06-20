@@ -105,6 +105,7 @@
       description: "{{ aehostd_aehost_description|default(omit) }}"
       ticket_id: "{{ aehostd_aehost_ticket_id|default(omit) }}"
       ppolicy: "{{ aehostd_aehost_ppolicy|default(omit) }}"
+      askotp: "{{ aehostd_setup_askotp }}"
     delegate_to: "127.0.0.1"
     become: no
     register: aehost_result

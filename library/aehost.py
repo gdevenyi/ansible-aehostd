@@ -6,6 +6,8 @@ ansible module for adding aeHost entries to Æ-DIR
 Copyright: (c) 2020, Michael Stroeder <michael@stroeder.com>
 """
 
+import getpass
+
 from ansible.module_utils.basic import AnsibleModule
 
 try:
@@ -107,6 +109,11 @@ options:
         description:
             - Path name of client key to be used for SASL/EXTERNAL bind.
         required: false
+    askotp:
+        description:
+            - If set to yes, the module asks interactively for an OTP part
+              used for binding as setup admin.
+        required: false
 
 author:
     - Michael Stroeder <michael@stroeder.com>
@@ -145,6 +152,7 @@ def get_module_args():
         cacert=dict(type='str', required=False),
         clcert=dict(type='str', required=False),
         clkey=dict(type='str', required=False),
+        askotp=dict(type='bool', default=True, required=False),
         # general arguments
         name=dict(type='str', required=True),
         state=dict(
@@ -189,12 +197,17 @@ def main():
     if not HAS_AEDIR:
         module.fail_json(msg="Missing required 'aedir' module (pip install aedir).")
 
+    if module.params['askotp']:
+        otp_value = getpass.getpass('Enter OTP:')
+    else:
+        otp_value = ''
+
     # Open LDAP connection to AE-DIR provider
     try:
         ldap_conn = AEDirObject(
             module.params['ldapurl'],
             who=module.params['binddn'],
-            cred=module.params['bindpw'],
+            cred=module.params['bindpw']+otp_value,
             cacert_filename=module.params['cacert'],
             client_cert_filename=module.params['clcert'],
             client_key_filename=module.params['clkey'],
