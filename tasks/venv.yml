@@ -18,7 +18,7 @@
       - pyasn1_modules
       - ldap0>=1.0.0
       - aedir>=1.0.0
-      - aehostd>=1.1.7
+      - aehostd>=1.1.9
     state: latest
     virtualenv: "{{ aehostd_venv_path }}"
     extra_args: "{{ aehostd_pip_args|join(' ') }}"
