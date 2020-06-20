@@ -117,8 +117,15 @@ aehostd_monitor: "-1.0"
 # Time span (seconds) after which aehostd forcibly reconnects.
 aehostd_conn_ttl: "7200"
 
-# template string to use to derive homeDirectory from username
-#aehostd_homedir_tmpl: "/home/{user}"
+# Template string to use to derive homeDirectory from username and/or POSIX-IDs
+# instead of querying it via LDAP.
+# Field names which can be used in template string:
+# - username,
+# - uid (for numeric POSIX-UID)
+# - gid (for numeric POSIX-GID)
+# Examples:
+# aehostd_homedir_tmpl: "/home/{user}"
+# aehostd_homedir_tmpl: "/run/user/{uid}"
 aehostd_homedir_tmpl: ""
 
 # service name of SSH demon
