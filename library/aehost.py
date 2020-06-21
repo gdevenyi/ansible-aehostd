@@ -95,7 +95,16 @@ options:
         required: false
     ldapurl:
         description:
-            - LDAP URI of Æ-DIR server (default ldapi://%2Fopt%2Fae-dir%2Frun%2Fslapd%2Fldapi)
+            - LDAP URI of Æ-DIR server
+        required: false
+        default: "ldapi://%2Fopt%2Fae-dir%2Frun%2Fslapd%2Fldapi"
+    binddn:
+        description:
+            - Bind-DN used for authentication with simple bind.
+        required: false
+    bindpw:
+        description:
+            - Password used for authentication with simple bind.
         required: false
     cacert:
         description:
@@ -114,6 +123,7 @@ options:
             - If set to yes, the module asks interactively for an OTP part
               used for binding as setup admin.
         required: false
+        default: no
 
 author:
     - Michael Stroeder <michael@stroeder.com>
@@ -152,7 +162,7 @@ def get_module_args():
         cacert=dict(type='str', required=False),
         clcert=dict(type='str', required=False),
         clkey=dict(type='str', required=False),
-        askotp=dict(type='bool', default=True, required=False),
+        askotp=dict(type='bool', default=False, required=False),
         # general arguments
         name=dict(type='str', required=True),
         state=dict(
