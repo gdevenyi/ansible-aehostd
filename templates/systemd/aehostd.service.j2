@@ -56,7 +56,7 @@ KeyringMode=private
 MemoryDenyWriteExecute=yes
 RemoveIPC=yes
 SystemCallArchitectures=native
-SystemCallFilter=~ @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete @chown @timer @privileged @resources
+SystemCallFilter=~ madvise @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete @timer @resources @privileged @pkey @obsolete @setuid
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
 
 {% if aehostd_apparmor_enabled %}
