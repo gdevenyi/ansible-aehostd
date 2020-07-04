@@ -115,16 +115,6 @@
   notify:
     - "restart aehostd"
 
-- name: "Install systemd unit file for aehostd"
-  template:
-    src: "systemd/aehostd.service.j2"
-    dest: "/etc/systemd/system/aehostd.service"
-    owner: root
-    group: root
-    mode: 0o0644
-  notify:
-    - "restart aehostd"
-
 - name: "Install tmpfiles config"
   copy:
     content: "d {{ aehostd_run_dir }} 0755 {{ aehostd_user }} {{ aehostd_group }}"
@@ -135,6 +125,17 @@
   notify:
     - "restart aehostd services"
 
+- name: "Install systemd unit file for aehostd"
+  template:
+    src: "systemd/aehostd.service.j2"
+    dest: "/etc/systemd/system/aehostd.service"
+    owner: root
+    group: root
+    mode: 0o0644
+  when: ansible_service_mgr == "systemd"
+  notify:
+    - "restart aehostd"
+
 - name: "Install systemd unit file for aehostd-ph"
   template:
     src: "systemd/aehostd-ph.service.j2"
@@ -142,9 +143,9 @@
     owner: root
     group: root
     mode: 0o0644
+  when: ansible_service_mgr == "systemd"
   notify:
     - "restart aehostd-ph"
-  when: ansible_service_mgr == "systemd"
 
 - name: "Make sure systemd unit files are reloaded"
   systemd:
