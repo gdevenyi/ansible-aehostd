@@ -110,9 +110,6 @@
     become: no
     register: aehost_result
 
-  - debug:
-      var: aehost_result
-
   - block:
 
     - name: "Wait for replication of changes"
