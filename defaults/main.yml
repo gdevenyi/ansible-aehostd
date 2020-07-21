@@ -4,12 +4,20 @@
 # map real LSB id to another LSB id to be used during plays
 aehostd_lsb_id_map:
   openSUSE: "SUSE"
+  Ubuntu: "Debian"
+
+# map real LSB codename to another LSB codename to be used during plays
+aehostd_lsb_codename_map:
+  focal: "buster"
 
 # Dictionary defining additional OS package repos
 aehostd_pkg_repos: "{{ aehostd_package_repos }}"
 
 # LSB id to be used during plays
 aehostd_lsb_id: "{{ aehostd_lsb_id_map.get(ansible_lsb.id,ansible_lsb.id) }}"
+
+# LSB codename to be used during plays
+aehostd_lsb_codename: "{{ aehostd_lsb_codename_map.get(ansible_lsb.codename,ansible_lsb.codename) }}"
 
 # state value passed to aehost: task
 aehostd_aehost_state: "present"
