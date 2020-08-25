@@ -9,7 +9,7 @@
     state: stopped
     enabled: no
   ignore_errors: yes
-  with_items: "{{ aehostd_stop_services }}"
+  loop: "{{ aehostd_stop_services }}"
   notify:
     - "restart aehostd services"
 
@@ -74,7 +74,7 @@
     owner: "{{ aehostd_user }}"
     group: "{{ aehostd_group }}"
     mode: 0o0750
-  with_items:
+  loop:
     - "{{ aehostd_db_dir }}"
     - "{{ aehostd_sshkeys_dir }}"
   notify:
@@ -87,7 +87,7 @@
     owner: "{{ aehostd_user }}"
     group: "{{ aehostd_group }}"
     mode: 0o0755
-  with_items:
+  loop:
     - "{{ aehostd_pid_file|dirname }}"
     - "{{ aehostd_socket|dirname }}"
   notify:
@@ -157,6 +157,6 @@
     name: "{{ item }}"
     state: started
     enabled: yes
-  with_items:
+  loop:
     - aehostd
     - aehostd-ph
