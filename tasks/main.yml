@@ -90,7 +90,7 @@
 
 - block:
 
-  - name: "Init aeHost entry"
+  - name: "Init aeHost entry on {{ aehostd_setup_ldapurl }}"
     aehost:
       ldapurl: "{{ aehostd_setup_ldapurl }}"
       cacert: "{{ aehostd_cacert_filename }}"
@@ -139,7 +139,7 @@
 
     when: aehost_result.changed and aehost_result.password
 
-  when: aehostd_setup_admin is defined
+  when: aehostd_setup_admin is defined and aehostd_setup_admin != ""
 
   tags:
     - aedir_init
