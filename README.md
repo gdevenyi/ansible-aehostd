@@ -5,6 +5,19 @@ This ansible role installs and configures
 [aehostd](https://www.ae-dir.com/aehostd.html)
 as NSS/PAM service on Linux systems.
 
+This ansible role manages the following system-wide configuration files
+which might conflict with other configuration requirements in your
+environment:
+
+  * /etc/nscd.conf
+  * /etc/nsswitch.conf
+  * /etc/pam.d/common*
+  * /etc/ssh/sshd_config
+  * /etc/sudoers
+
+Thus you should fork this ansible role and maintain your own site-specific
+deployment.
+
 The installation differs a bit for the supported platforms:
 
   * Debian buster
