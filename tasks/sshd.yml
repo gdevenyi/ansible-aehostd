@@ -1,0 +1,45 @@
+---
+
+- name: "Create directory for pre-installed SSH authorized keys"
+  file:
+    path: "{{ aehostd_sshd_authorized_keys }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0o0750
+
+- name: "Install SSH emergency root key(s)"
+  copy:
+    src: "{{ aehostd_sshd_emergency_root_keys }}"
+    dest: "{{ aehostd_sshd_authorized_keys }}/root"
+    owner: root
+    group: root
+    mode: 0o0640
+  when:
+    aehostd_sshd_emergency_root_keys != ""
+
+- name: "Install SSH trusted user CA key(s)"
+  copy:
+    src: "{{ inventory_dir }}/files/{{ aehostd_sshd_trusted_userca_keys|basename }}"
+    dest: "{{ aehostd_sshd_trusted_userca_keys }}"
+    owner: root
+    group: root
+    mode: 0o0640
+  when:
+    aehostd_sshd_trusted_userca_keys != ""
+
+- name: "Install sshd_config"
+  template:
+    src: "{{ aehostd_sshd_config_template }}"
+    dest: "/etc/ssh/sshd_config"
+    owner: root
+    group: root
+    mode: 0o0640
+    validate: "/usr/sbin/sshd -t -f %s"
+  notify: restart sshd
+
+- name: "Ensure SSH demon is running"
+  service:
+    name: "{{ aehostd_sshd_service_name }}"
+    state: started
+    enabled: yes

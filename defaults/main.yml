@@ -155,7 +155,9 @@ aehostd_stop_services: []
 aehostd_sshd_sftp_server: "internal-sftp"
 
 # Filename of Jinja2 template file used for generating sshd_config
+# if set to empty string configuring sshd is entirely skipped
 aehostd_sshd_config_template: "sshd_config.j2"
+
 aehostd_sshd_authorized_keys: "/etc/ssh/authorized_keys"
 
 # ListenAddress values
