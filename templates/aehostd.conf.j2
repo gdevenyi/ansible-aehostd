@@ -169,10 +169,10 @@ homedir_tmpl = {{ aehostd_homedir_tmpl }}
 # Default: None (disabled)
 #loginshell_override =
 
-{% if aehostd_sudoers_file %}
 # sudo parameters
 #-------------------------------------------
 
+{% if aehostd_sudoers_file %}
 # Path name of sudoers export file to be picked up by privileged helper
 sudoers_file = {{ aehostd_sudoers_file }}
 
@@ -185,6 +185,9 @@ sudoers_includedir = /etc/sudoers.d
 # pathname of visudo cvtsudoers
 # Default: /usr/bin/cvtsudoers
 #cvtsudoers_exec = /usr/bin/cvtsudoers
+{% else %}
+# sudoers_file set to empty string => sudoers export is disabled
+sudoers_file = {{ aehostd_sudoers_file }}
 {% endif %}
 
 # PAM parameters
