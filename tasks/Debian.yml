@@ -18,7 +18,7 @@
   apt:
     name:
       - sudo
-      - python3-venv
+      - "{{ aehostd_venv_package }}
     state: present
     update_cache: no
     install_recommends: no

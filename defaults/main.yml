@@ -215,6 +215,9 @@ aehostd_pip_index_url: 'https://pypi.python.org/simple'
 # whether C compiler is needed for PIP installation
 aehostd_pip_needs_compiler: "{{ aehostd_pip_index_url == 'https://pypi.python.org/simple' }}"
 
+# Name of OS package required to initialize virtual env (used on Debian)
+aehostd_venv_package: "python3-venv"
+
 # directory name for virtual env (used on Debian and CentOS)
 aehostd_venv_path: "/opt/aehostd"
 
