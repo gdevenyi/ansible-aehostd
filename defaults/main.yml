@@ -113,8 +113,12 @@ aehostd_sshkeys_dir: "{{ aehostd_lib_dir }}/sshkeys"
 aehostd_db_dir: "{{ aehostd_lib_dir }}/db"
 aehostd_run_dir: "/run/{{ aehostd_user }}"
 aehostd_pw_file: "{{ aehostd_lib_dir }}/aehostd.pw"
-aehostd_sudoers_file: "{{ aehostd_lib_dir }}/ae-dir-sudoers-export"
 aehostd_pid_file: "{{ aehostd_run_dir }}/aehostd.pid"
+
+# Pathname of sudoers export file
+# setting this to an empty string disables sudoers export
+aehostd_sudoers_file: "{{ aehostd_lib_dir }}/ae-dir-sudoers-export"
+
 # Path name of Unix domain socket for listening
 # (must match value of nss-pam-ldapd's build-time config option --with-nslcd-socket)
 aehostd_socket: "{{ aehostd_run_dir }}/aehostd.sock"
