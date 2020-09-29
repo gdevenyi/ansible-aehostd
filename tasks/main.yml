@@ -39,7 +39,7 @@
 
 - name: "Install sudoers file"
   template:
-    src: "sudoers.j2"
+    src: "{{ aehostd_sudoers_template }}"
     dest: "/etc/sudoers"
     owner: root
     group: root

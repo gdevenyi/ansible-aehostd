@@ -119,6 +119,9 @@ aehostd_pid_file: "{{ aehostd_run_dir }}/aehostd.pid"
 # setting this to an empty string disables sudoers export
 aehostd_sudoers_file: "{{ aehostd_lib_dir }}/ae-dir-sudoers-export"
 
+# Filename of Jinja2 template file used for generating /etc/sudoers
+aehostd_sudoers_template: "sudoers.j2"
+
 # Path name of Unix domain socket for listening
 # (must match value of nss-pam-ldapd's build-time config option --with-nslcd-socket)
 aehostd_socket: "{{ aehostd_run_dir }}/aehostd.sock"
