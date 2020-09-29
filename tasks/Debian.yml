@@ -18,7 +18,7 @@
   apt:
     name:
       - sudo
-      - "{{ aehostd_venv_package }}
+      - "{{ aehostd_venv_package }}"
     state: present
     update_cache: no
     install_recommends: no
