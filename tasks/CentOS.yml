@@ -9,8 +9,7 @@
 
 - name: "Install NSS and PAM modules"
   yum:
-    name:
-      - aehostd-modules
+    name: "{{ aehostd_module_packages }}"
     state: present
     update_cache: no
 
