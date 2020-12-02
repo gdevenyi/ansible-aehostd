@@ -110,7 +110,7 @@ conn_ttl = {{ aehostd_conn_ttl }}
 #nss_ignore_gids =
 # Refresh time (seconds) for NSS passwd and group maps
 # Default: 60.0 (1 min)
-#refresh_sleep = 60.0
+refresh_sleep = {{ aehostd_refresh_sleep }}
 
 # Minimum numeric UID to handle in passwd requests
 # Default: 0
