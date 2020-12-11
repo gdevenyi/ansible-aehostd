@@ -53,7 +53,7 @@
       update_cache: no
       install_recommends: no
       dpkg_options: 'force-confold,force-confdef'
-    when: ldap0_installed.rc != 0
+    when: aehostd_pip_install_compiler is defined or ldap0_installed.rc != 0
 
   when: aehostd_pip_needs_compiler==True
 

@@ -215,6 +215,9 @@ aehostd_pip_index_url: 'https://pypi.python.org/simple'
 # whether C compiler is needed for PIP installation
 aehostd_pip_needs_compiler: "{{ aehostd_pip_index_url == 'https://pypi.python.org/simple' }}"
 
+# define this variable to enforce installing build tools for pip install
+#aehostd_pip_install_compiler: 1
+
 # Name of OS package required to initialize virtual env (used on Debian)
 aehostd_venv_package: "python3-venv"
 

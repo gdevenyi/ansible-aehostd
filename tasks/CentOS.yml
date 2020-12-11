@@ -31,7 +31,7 @@
         - libffi-devel
       state: present
       update_cache: no
-    when: ldap0_installed.rc != 0
+    when: aehostd_pip_install_compiler is defined or ldap0_installed.rc != 0
 
   when: aehostd_pip_needs_compiler==True
 
