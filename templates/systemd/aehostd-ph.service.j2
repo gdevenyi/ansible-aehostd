@@ -26,7 +26,6 @@ Environment=PYTHONDONTWRITEBYTECODE=1
 Environment=PYTHONWARNINGS=default
 ExecStart={{ aehostd_python }} -m aehostd.priv --no-fork --pid {{ aehostd_pid_file|dirname }}/aehostd-ph.pid --config {{ aehostd_conf_file }}
 Restart=always
-StandardError=syslog
 UMask=027
 # various hardening options
 CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
@@ -34,7 +33,6 @@ AmbientCapabilities=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
 PrivateTmp=yes
 PrivateDevices=yes
 DevicePolicy=closed
-DeviceAllow=/dev/log w
 PrivateNetwork=yes
 IPAddressDeny=any
 ProtectSystem=yes

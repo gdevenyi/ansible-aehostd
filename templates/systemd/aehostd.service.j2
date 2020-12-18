@@ -29,7 +29,6 @@ Environment=PYTHONDONTWRITEBYTECODE=1
 Environment=PYTHONWARNINGS=default
 ExecStart={{ aehostd_python }} -m aehostd.srv --no-fork --pid {{ aehostd_pid_file }} --config {{ aehostd_conf_file }}
 Restart=always
-StandardError=syslog
 UMask=027
 # various hardening options
 CapabilityBoundingSet=
@@ -37,7 +36,6 @@ AmbientCapabilities=
 PrivateTmp=yes
 PrivateDevices=yes
 DevicePolicy=closed
-DeviceAllow=/dev/log w
 ProtectSystem=full
 ProtectHome=yes
 ProtectKernelModules=yes
