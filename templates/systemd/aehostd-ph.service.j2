@@ -24,7 +24,7 @@ Environment=PYTHONOPTIMIZE=2
 # avoid to accidentially write Python byte code
 Environment=PYTHONDONTWRITEBYTECODE=1
 Environment=PYTHONWARNINGS=default
-ExecStart={{ aehostd_python }} -m aehostd.priv --no-fork --pid {{ aehostd_pid_file|dirname }}/aehostd-ph.pid --config {{ aehostd_conf_file }}
+ExecStart={{ aehostd_python }} -m aehostd.priv --pid {{ aehostd_pid_file|dirname }}/aehostd-ph.pid --config {{ aehostd_conf_file }}
 Restart=always
 UMask=027
 # various hardening options
