@@ -23,7 +23,6 @@
       - python3-ldap0>=1.0.0
       - python3-aedir>=1.0.0
       - python3-lockfile
-      - python3-python-daemon
       - aehostd-modules
       - "aehostd >= 1.2.0"
       - sudo
