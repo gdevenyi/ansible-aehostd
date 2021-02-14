@@ -1,6 +1,9 @@
 ---
 # defaults file for roles/ae-dir-hostd
 
+# minimum version of aehostd to install
+aehostd_min_version: "1.3.1"
+
 # map real LSB id to another LSB id to be used during plays
 aehostd_lsb_id_map:
   openSUSE: "SUSE"
