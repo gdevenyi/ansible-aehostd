@@ -2,4 +2,4 @@
 # vars file for roles/aehostd
 
 # system-specific limited replacement for @resources
-systemcallfilter_resources: "{{ 'sched_setparam sched_setscheduler sched_setaffinity setpriority setrlimit set_mempolicy migrate_pages move_pages mbind sched_setattr' if ansible_lsb.description=='openSUSE Leap 15.2' else '@resources' }}"
+systemcallfilter_resources: "{{ '@resources' if ansible_lsb.description=='openSUSE Tumbleweed' else 'sched_setparam sched_setscheduler sched_setaffinity setpriority setrlimit set_mempolicy migrate_pages move_pages mbind sched_setattr' }}"
