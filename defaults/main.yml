@@ -75,6 +75,13 @@ aehostd_max_uid: 65000
 aehostd_min_gid: 30000
 aehostd_max_gid: 65000
 
+# Refresh time (seconds) for hosts maps. Negative values disables hosts refresh.
+# Default: -1.0 (disabled)
+aehostd_netaddr_refresh: -1.0
+# Levels (int) to go up for deriving the hosts map search base.
+# Default: 2
+aehostd_netaddr_level: 2
+
 # source file containing all trusted CA certs file
 # (set to empty string to disable copy task)
 aehostd_cacert_filename: "cacert.pem"

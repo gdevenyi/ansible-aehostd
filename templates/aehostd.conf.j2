@@ -135,10 +135,10 @@ refresh_sleep = {{ aehostd_refresh_sleep }}
 
 # Refresh time (seconds) for hosts maps. Negative values disables hosts refresh.
 # Default: -1.0 (disabled)
-#netaddr_refresh = -1.0
+netaddr_refresh = {{ aehostd_netaddr_refresh }}
 # Levels (int) to go up for deriving the hosts map search base.
 # Default: 2
-#netaddr_level = 2
+netaddr_level = {{ aehostd_netaddr_level }}
 
 # Which member attribute in aeGroup entries to use
 # Default: memberUid
