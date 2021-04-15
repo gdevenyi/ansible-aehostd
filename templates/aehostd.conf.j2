@@ -22,6 +22,10 @@ logsocket = /dev/log
 # The default is -1.0 (disabled).
 monitor = {{ aehostd_monitor }}
 
+# number of NSS/PAM handler threads to start
+# Default: 4
+threads = {{ aehostd_threads }}
+
 # Parameters for the Unix domain socket over which
 # to receive requests from front-end modules
 #-------------------------------------------------
