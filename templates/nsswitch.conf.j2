@@ -11,7 +11,7 @@ group:          files [success=return] {{ aehostd_nss_module }}
 shadow:         files
 gshadow:        files
 
-hosts:          files dns
+hosts:          files {{ aehostd_nss_module if aehostd_netaddr_refresh|float > 0 else '' }} dns
 networks:       files dns
 
 services:       files
