@@ -51,6 +51,11 @@ aehostd_replication_wait: 5
 # before proceeding with next tasks
 aehostd_init_wait: 5
 
+# Path name of syslog socket:
+# Setting this to a string enforces using syslog with a certain socket
+# Just comment this to use stderr.
+aehostd_logsocket: "/dev/log"
+
 # number of NSS/PAM handler threads to start
 aehostd_threads: 4
 

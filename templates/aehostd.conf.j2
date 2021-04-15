@@ -20,7 +20,11 @@ loglevel = {{ aehostd_loglevel }}
 # Setting this to a string enforces using syslog, empty string results
 # in default syslog socket /dev/log being used.
 # Default: None (sends log messages to stderr)
-logsocket = /dev/log
+{% if aehostd_logsocket is defined %}
+logsocket = {{ aehostd_logsocket }}
+{% else %}
+#logsocket =
+{% endif %}
 
 # Interval (seconds) at which internal monitoring data is written to log.
 # Setting this to zero or negative value disables monitor logging completely.
