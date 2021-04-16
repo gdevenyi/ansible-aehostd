@@ -214,5 +214,4 @@ pam_authc_cache_attrs = {{ aehostd_pam_authc_cache_attrs|join(' ') }}
 pam_authz_search = {{ aehostd_pam_authz_search }}
 
 # Error message sent to user about password change disabled/denied
-pam_passmod_deny_msg = Changing password on local system is not allowed for this user!
-
+pam_passmod_deny_msg = {{ aehostd_pam_passmod_deny_msg }}

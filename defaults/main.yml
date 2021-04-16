@@ -223,6 +223,10 @@ aehostd_pam_authc_cache_attrs:
 # (note: AE-DIR already does this implicit via visibility of aeUser entries)
 aehostd_pam_authz_search: "(&(uid={username})(|(pwdChangedTime=*)(userCertificate=*)(sshPublicKey=*)))"
 
+# Error message sent to user about password change disabled/denied
+# for giving the user a hint where to go instead
+aehostd_pam_passmod_deny_msg: "Changing password on local system is not allowed for this user!"
+
 #---------------------------------------------------------------------------
 # Python virtual env parameters
 #---------------------------------------------------------------------------
