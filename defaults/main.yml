@@ -8,6 +8,8 @@ aehostd_min_version: "1.4.4"
 aehostd_lsb_id_map:
   openSUSE: "SUSE"
   Ubuntu: "Debian"
+  RedHatEnterpriseServer: "CentOS"
+  AlmaLinux: "CentOS"
 
 # map real LSB codename to another LSB codename to be used during plays
 aehostd_lsb_codename_map:
