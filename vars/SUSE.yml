@@ -7,6 +7,7 @@ aehostd_suse_repo:
   "SUSE Linux Enterprise Server 15 SP2": "https://download.opensuse.org/repositories/home:/stroeder:/iam/SLE_15_SP2/"
   "openSUSE Leap 15.1": "https://download.opensuse.org/repositories/home:/stroeder:/iam/openSUSE_Leap_15.1/"
   "openSUSE Leap 15.2": "https://download.opensuse.org/repositories/home:/stroeder:/iam/openSUSE_Leap_15.2/"
+  "openSUSE Leap 15.3": "https://download.opensuse.org/repositories/home:/stroeder:/iam/openSUSE_Leap_15.3/"
   "openSUSE Tumbleweed": "https://download.opensuse.org/repositories/home:/stroeder:/iam/openSUSE_Tumbleweed/"
 
 aehostd_package_repos:
