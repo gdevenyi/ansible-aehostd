@@ -1,4 +1,0 @@
----
-# specific vars for RHEL/CentOS
-
-aehostd_package_repos: {}

@@ -1,0 +1,4 @@
+---
+# specific vars for RHEL-alike
+
+aehostd_package_repos: {}

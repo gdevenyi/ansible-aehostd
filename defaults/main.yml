@@ -7,9 +7,10 @@ aehostd_min_version: "1.5.0"
 # map real LSB id to another LSB id to be used during plays
 aehostd_lsb_id_map:
   openSUSE: "SUSE"
-  Ubuntu: "Debian"
-  RedHatEnterpriseServer: "CentOS"
-  AlmaLinux: "CentOS"
+  RedHatEnterpriseServer: "RHEL"
+  AlmaLinux: "RHEL"
+  CentOS: "RHEL"
+  Rocky: "RHEL"
 
 # map real LSB codename to another LSB codename to be used during plays
 aehostd_lsb_codename_map:
@@ -92,7 +93,7 @@ aehostd_cacert_pathname: "/etc/ssl/{{ aehostd_cacert_filename|basename }}"
 
 # nested dict of OS-specific vars
 aehostd_os_vars:
-  CentOS:
+  RHEL:
     sshd_service_name: "sshd"
     ssh_lib_dir: "/usr/libexec/openssh"
     python: "{{ aehostd_venv_path }}/bin/python3"
@@ -245,7 +246,7 @@ aehostd_pip_needs_compiler: "{{ aehostd_pip_index_url == 'https://pypi.python.or
 # Name of OS package required to initialize virtual env (used on Debian)
 aehostd_venv_package: "python3-venv"
 
-# directory name for virtual env (used on Debian and CentOS)
+# directory name for virtual env (used on Debian and RHEL-alike)
 aehostd_venv_path: "/opt/aehostd"
 
 # command used to create virtual env
