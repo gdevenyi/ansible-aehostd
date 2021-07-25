@@ -21,9 +21,9 @@ deployment.
 The installation differs a bit for the supported platforms:
 
   * Debian buster
-  * CentOS 7.7 and 8
-  * openSUSE Leap 15.1+ and Tumbleweed
-  * SLE 15SP1 or newer
+  * RHEL-alike systems 8+ (Red-Hat Enterprise Linux, AlmaLinux, Rocky Linux, CentOS)
+  * openSUSE Leap 15.2+ and Tumbleweed
+  * SLE 15SP2 or newer
 
 openSUSE / SLE
 --------------
