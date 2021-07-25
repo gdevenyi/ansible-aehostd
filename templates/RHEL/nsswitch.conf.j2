@@ -1,0 +1,29 @@
+# {{ ansible_managed }}
+#
+# /etc/nsswitch.conf
+#
+# Configuration of GNU Name Service Switch functionality.
+# If you have the `glibc-doc-reference' and `info' packages installed, try:
+# `info libc "Name Service Switch"' for information about this file.
+
+passwd:         files [success=return] {{ aehostd_nss_module }} systemd
+group:          files [success=return] {{ aehostd_nss_module }} systemd
+shadow:         files
+gshadow:        files
+
+hosts:          files {{ aehostd_nss_module if aehostd_netaddr_refresh|float > 0 else '' }} dns myhostname
+networks:       files dns
+
+services:       files
+protocols:      files
+rpc:            files
+ethers:         files
+netmasks:       files
+netgroup:       files
+publickey:      files
+
+bootparams:     files
+automount:      files
+aliases:        files
+
+sudoers:        files

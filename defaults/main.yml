@@ -140,6 +140,10 @@ aehostd_pid_file: "{{ aehostd_run_dir }}/aehostd.pid"
 # setting this to an empty string disables sudoers export
 aehostd_sudoers_file: "{{ aehostd_lib_dir }}/ae-dir-sudoers-export"
 
+# Jinja2 template for /etc/nsswitch.conf
+# setting this to empty string skips creation of /etc/nsswitch.conf
+aehostd_nsswitch_config_template: "{{ aehostd_lsb_id }}/nsswitch.conf.j2"
+
 # Filename of Jinja2 template file used for generating /etc/sudoers
 aehostd_sudoers_template: "sudoers.j2"
 

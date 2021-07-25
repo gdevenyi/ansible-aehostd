@@ -19,11 +19,13 @@
 
 - name: "Create nsswitch.conf"
   template:
-    src: "nsswitch.conf.j2"
+    src: "{{ aehostd_nsswitch_config_template }}"
     dest: "/etc/nsswitch.conf"
     owner: root
     group: root
     mode: 0o0644
+  when:
+    aehostd_nsswitch_config_template != ""
 
 - name: "Install PAM config files from {{ aehostd_pam_template_dir }}/"
   template:
