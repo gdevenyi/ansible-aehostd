@@ -12,18 +12,11 @@ aehostd_lsb_id_map:
   CentOS: "RHEL"
   Rocky: "RHEL"
 
-# map real LSB codename to another LSB codename to be used during plays
-aehostd_lsb_codename_map:
-  focal: "buster"
-
 # Dictionary defining additional OS package repos
 aehostd_pkg_repos: "{{ aehostd_package_repos }}"
 
 # LSB id to be used during plays
 aehostd_lsb_id: "{{ aehostd_lsb_id_map.get(ansible_lsb.id,ansible_lsb.id) }}"
-
-# LSB codename to be used during plays
-aehostd_lsb_codename: "{{ aehostd_lsb_codename_map.get(ansible_lsb.codename,ansible_lsb.codename) }}"
 
 # state value passed to aehost: task
 aehostd_aehost_state: "present"
@@ -105,6 +98,10 @@ aehostd_os_vars:
     sshd_service_name: "sshd"
     ssh_lib_dir: "/usr/lib/ssh"
     python: "/usr/bin/python3"
+  Ubuntu:
+    sshd_service_name: "ssh"
+    ssh_lib_dir: "/usr/lib/openssh"
+    python: "{{ aehostd_venv_path }}/bin/python3"
 
 # which module name to use in /etc/nsswitch.conf
 aehostd_nss_module: "aedir"

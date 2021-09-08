@@ -1,0 +1,7 @@
+---
+# specific vars for Debian
+
+aehostd_package_repos:
+  "AE-DIR":
+    repo: "deb https://ae-dir.com/repo/ubuntu/focal focal main"
+    key: "AE-DIR-project.gpg.key"
