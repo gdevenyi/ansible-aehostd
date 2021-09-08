@@ -207,7 +207,7 @@ aehostd_sshd_trusted_userca_keys: ""
 
 # where to find the system-specific Jinja2 templates
 # for creating PAM config files /etc/pam.d/common-*
-aehostd_pam_template_dir: "{{ role_path }}/templates/{{ aehostd_lsb_id }}"
+aehostd_pam_template_dir: "{{ role_path }}/templates/{{ aehostd_lsb_id }}/pam.d"
 
 # Arguments used by pam_mkhomedir for automatic creation of user's home directory
 # (empty string disables use of pam_mkhomedir)
