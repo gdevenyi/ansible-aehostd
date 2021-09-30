@@ -12,6 +12,6 @@
 #
 account	sufficient	{{ aehostd_pam_module }} minimum_uid={{ aehostd_min_uid }}
 account	required	pam_unix.so
-{% if aehostd_pam_mkhomedir_args %}
+{% if aehostd_pam_mkhomedir_args is defined %}
 session	required	pam_mkhomedir.so {{ aehostd_pam_mkhomedir_args }}
 {% endif %}

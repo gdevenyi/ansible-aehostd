@@ -207,8 +207,8 @@ aehostd_sshd_trusted_userca_keys: ""
 aehostd_pam_template_dir: "{{ role_path }}/templates/{{ aehostd_lsb_id }}/pam.d"
 
 # Arguments used by pam_mkhomedir for automatic creation of user's home directory
-# (empty string disables use of pam_mkhomedir)
-aehostd_pam_mkhomedir_args: ""
+# (undefined var disables use of pam_mkhomedir)
+#aehostd_pam_mkhomedir_args: "umask=0077 skel=/etc/skel"
 
 # LDAP search filter for PAM authorization
 #-----------------------------------------
