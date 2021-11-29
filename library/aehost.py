@@ -1,9 +1,8 @@
-
-# -*- coding: utf-8 -*-
+# -*- coding: ascii -*-
 """
-ansible module for adding aeHost entries to Æ-DIR
+ansible module for adding aeHost entries to xC6-DIR
 
-Copyright: (c) 2020, Michael Stroeder <michael@stroeder.com>
+Copyright: (c) 2020-2021, Michael Stroeder <michael@stroeder.com>
 """
 
 import getpass
@@ -50,10 +49,10 @@ DOCUMENTATION = '''
 ---
 module: aehost
 
-short_description: Create or update an aeHost entries in Æ-DIR
+short_description: Create or update an aeHost entries in xC6-DIR
 
 description:
-    - "This module creates/updates aeHost entries in Æ-DIR"
+    - "This module creates/updates aeHost entries in xC6-DIR"
 
 options:
     name:
@@ -95,7 +94,7 @@ options:
         required: false
     ldapurl:
         description:
-            - LDAP URI of Æ-DIR server
+            - LDAP URI of xC6-DIR server
         required: false
         default: "ldapi://%2Fopt%2Fae-dir%2Frun%2Fslapd%2Fldapi"
     binddn:
@@ -233,7 +232,11 @@ def main():
         module.params['ppolicy'] = 'cn=ppolicy-systems,cn=ae,'+ldap_conn.search_base
 
     if module.params['srvgroup'] is None:
-        parent_dn = ldap_conn.find_aehost(module.params['host']).dn_o.parent()
+        try:
+            parent_dn = ldap_conn.find_aehost(module.params['host']).dn_o.parent()
+        except ldap0.err.NoUniqueEntry as ldap_err:
+            module.fail_json(
+                msg='Error finding parent DN / missing srvgroup argument: %s' % (ldap_err))
     else:
         ae_srvgroup = ldap_conn.find_aesrvgroup(module.params['srvgroup'])
         parent_dn = ae_srvgroup.dn_o
