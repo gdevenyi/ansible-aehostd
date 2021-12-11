@@ -93,7 +93,7 @@ aehostd_os_vars:
   Debian:
     sshd_service_name: "ssh"
     ssh_lib_dir: "/usr/lib/openssh"
-    python: "{{ aehostd_venv_path }}/bin/python3"
+    python: "/usr/bin/python3"
   SUSE:
     sshd_service_name: "sshd"
     ssh_lib_dir: "/usr/lib/ssh"
@@ -101,7 +101,7 @@ aehostd_os_vars:
   Ubuntu:
     sshd_service_name: "ssh"
     ssh_lib_dir: "/usr/lib/openssh"
-    python: "{{ aehostd_venv_path }}/bin/python3"
+    python: "/usr/bin/python3"
 
 # which module name to use in /etc/nsswitch.conf
 aehostd_nss_module: "aedir"
