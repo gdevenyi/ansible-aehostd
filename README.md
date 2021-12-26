@@ -20,7 +20,8 @@ deployment.
 
 The installation differs a bit for the supported platforms:
 
-  * Debian buster
+  * Debian buster or newer
+  * Ubuntu focal or newer
   * RHEL-alike systems 8+ (Red-Hat Enterprise Linux, AlmaLinux, Rocky Linux, CentOS)
   * openSUSE Leap 15.2+ and Tumbleweed
   * SLE 15SP2 or newer
@@ -28,21 +29,32 @@ The installation differs a bit for the supported platforms:
 openSUSE / SLE
 --------------
 
-Native packages are built in OBS repo
-[home:stroeder:iam](https://build.opensuse.org/project/show/home:stroeder:iam)
-for the various openSUSE and SLE versions.
+Native RPM packages used by this role are built in OBS repo
+_home:stroeder:iam_ for the openSUSE and SLE versions.
 
-The appropriate download repo has to be added before like this:
+You can set ansible variable _aehostd_pkg_repos_ in your group vars
+to install packages from your local mirror.
 
-```
-zypper addrepo -f https://download.opensuse.org/repositories/home:/stroeder:/iam/openSUSE_Tumbleweed/
-```
+See also:
+  * [List of zypper repos](https://download.opensuse.org/repositories/home:/stroeder:/iam/)
+  * [OBS package home:stroeder:iam/aehostd](https://build.opensuse.org/package/show/home:stroeder:iam/aehostd)
+  * [OBS package home:stroeder:iam/aehostd-modules](https://build.opensuse.org/package/show/home:stroeder:iam/aehostd-modules)
 
-See also: [List of zypper repos](https://download.opensuse.org/repositories/home:/stroeder:/iam/)
+Debian/Ubuntu
+-------------
 
+Native Debian/Ubuntu packages used by this role are available
+in a custom APT repository.
 
-Debian
-------
+You can set ansible variable _aehostd_pkg_repos_ in your group vars
+to install packages from your local mirror.
+
+See also:
+  * [APT repos for Debian](https://ae-dir.com/repo/debian/)
+  * [APT repos for Ubuntu](https://ae-dir.com/repo/ubuntu/)
+
+RHEL-alike
+----------
 
 A Python virtual environment is used to install _aehostd_.
 
