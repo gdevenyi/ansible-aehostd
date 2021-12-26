@@ -30,7 +30,7 @@ openSUSE / SLE
 --------------
 
 Native RPM packages used by this role are built in OBS repo
-_home:stroeder:iam_ for the openSUSE and SLE versions.
+_home:stroeder:iam_ for various openSUSE and SLE versions.
 
 You can set ansible variable _aehostd_pkg_repos_ in your group vars
 to install packages from your local mirror.
