@@ -16,7 +16,7 @@
     name:
       - pyasn1
       - pyasn1_modules
-      - "ldap0>=1.0.0"
+      - "ldap0"
       - "aedir>=1.4.3"
       - "aehostd>={{ aehostd_min_version }}"
     state: latest
