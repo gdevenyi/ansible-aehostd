@@ -122,7 +122,7 @@ aehostd_gid: "{{ aehostd_uid }}"
 aehostd_loglevel: "20"
 
 # Python interpreter
-aehostd_python: "{{ aehostd_os_vars[aehostd_lsb_id].python }} -ROOBs"
+aehostd_python: "{{ aehostd_os_vars[aehostd_lsb_id].python }} -ROOBs -bb"
 
 # Pathnames of aehostd's files and directories
 aehostd_conf_file: "/etc/aehostd.conf"
