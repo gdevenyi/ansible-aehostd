@@ -1,0 +1,54 @@
+#-----------------------------------------------------------------------
+# initiate:   systemctl enable {{ aehostd_sudoers_file|basename }}.service
+# start:      systemctl start {{ aehostd_sudoers_file|basename }}.service
+# get status: systemctl status {{ aehostd_sudoers_file|basename }}.service
+#
+# {{ ansible_managed }}
+#-----------------------------------------------------------------------
+
+[Unit]
+Description=Move {{ aehostd_sudoers_file }} to /etc/sudoers.d/
+Documentation=https://ae-dir.com/aehostd.html
+Requires=local-fs.target
+After=local-fs.target
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+ExecStart=mv -v {{ aehostd_sudoers_file }} /etc/sudoers.d/{{ aehostd_sudoers_file|basename }}
+ExecStart=chown -c root:root /etc/sudoers.d/{{ aehostd_sudoers_file|basename }}
+ExecStart=chmod -c 0440 /etc/sudoers.d/{{ aehostd_sudoers_file|basename }}
+UMask=027
+# various hardening options
+CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
+AmbientCapabilities=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
+PrivateTmp=yes
+PrivateDevices=yes
+DevicePolicy=closed
+PrivateNetwork=yes
+IPAddressDeny=any
+ProtectSystem=yes
+ProtectHome=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectHostname=yes
+ProtectClock=yes
+NoNewPrivileges=yes
+MountFlags=private
+LockPersonality=yes
+RestrictRealtime=yes
+RestrictNamespaces=yes
+RestrictSUIDSGID=yes
+KeyringMode=private
+MemoryDenyWriteExecute=yes
+RemoveIPC=yes
+SystemCallArchitectures=native
+SystemCallFilter=~ madvise @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete @timer {{ systemcallfilter_resources }} @privileged @pkey @obsolete @setuid
+SystemCallFilter=chown chown32 fchown fchown32 fchownat lchown lchown32
+RestrictAddressFamilies=
+
+[Install]
+WantedBy=multi-user.target

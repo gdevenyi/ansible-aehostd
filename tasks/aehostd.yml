@@ -137,27 +137,38 @@
     notify:
       - "restart aehostd"
 
-  - name: "Install systemd unit file for aehostd-ph"
+  - name: "Install systemd path and service unit files for {{ aehostd_sudoers_file|basename }}"
     template:
-      src: "systemd/aehostd-ph.service.j2"
-      dest: "/etc/systemd/system/aehostd-ph.service"
+      src: "systemd/{{ aehostd_sudoers_file|basename }}.{{ item }}.j2"
+      dest: "/etc/systemd/system/{{ aehostd_sudoers_file|basename }}.{{ item }}"
       owner: root
       group: root
       mode: 0o0644
-    notify:
-      - "restart aehostd-ph"
+    loop:
+      - "service"
+      - "path"
 
   - name: "Make sure systemd unit files are reloaded"
     systemd:
       daemon_reload: yes
 
+  - name: "Ensure {{ aehostd_sudoers_file|basename }}.path is enabled"
+    service:
+      name: "{{ aehostd_sudoers_file|basename }}.path"
+      state: started
+      enabled: yes
+
   when: ansible_service_mgr == "systemd"
 
-- name: "Ensure aehostd services are enabled and running"
+- name: "Ensure service aehostd is enabled and running"
   service:
-    name: "{{ item }}"
+    name: "aehostd"
     state: started
     enabled: yes
-  loop:
-    - aehostd
-    - aehostd-ph
+
+- name: "Ensure service aehostd-ph is enabled and running"
+  service:
+    name: "aehostd-ph"
+    state: started
+    enabled: yes
+  when: ansible_service_mgr != "systemd"

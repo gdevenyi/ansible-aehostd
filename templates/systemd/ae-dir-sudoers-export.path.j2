@@ -1,0 +1,14 @@
+# This path unit watches {{ aehostd_sudoers_file }} and triggers
+# a service unit which moves it to /etc/sudoers.d/
+#
+# {{ ansible_managed }}
+
+[Unit]
+Description="Monitor file {{ aehostd_sudoers_file }} for new sudoers exports"
+
+[Path]
+PathChanged={{ aehostd_sudoers_file }}
+Unit={{ aehostd_sudoers_file|basename }}.service
+
+[Install]
+WantedBy=multi-user.target
