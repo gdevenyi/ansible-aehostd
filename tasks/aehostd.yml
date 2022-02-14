@@ -158,6 +158,12 @@
       state: started
       enabled: yes
 
+  - name: "Ensure service aehostd-ph is disabled and stopped"
+    service:
+      name: "aehostd-ph"
+      state: stopped
+      enabled: no
+
   when: ansible_service_mgr == "systemd"
 
 - name: "Ensure service aehostd is enabled and running"
