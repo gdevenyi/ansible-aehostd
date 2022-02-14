@@ -16,6 +16,7 @@ After=local-fs.target
 Type=oneshot
 User=root
 Group=root
+SyslogIdentifier={{ aehostd_sudoers_file|basename }}
 ExecStart=mv -v {{ aehostd_sudoers_file }} /etc/sudoers.d/{{ aehostd_sudoers_file|basename }}
 ExecStart=chown -c root:root /etc/sudoers.d/{{ aehostd_sudoers_file|basename }}
 ExecStart=chmod -c 0440 /etc/sudoers.d/{{ aehostd_sudoers_file|basename }}
