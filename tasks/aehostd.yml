@@ -125,31 +125,32 @@
   notify:
     - "restart aehostd services"
 
-- name: "Install systemd unit file for aehostd"
-  template:
-    src: "systemd/aehostd.service.j2"
-    dest: "/etc/systemd/system/aehostd.service"
-    owner: root
-    group: root
-    mode: 0o0644
-  when: ansible_service_mgr == "systemd"
-  notify:
-    - "restart aehostd"
+- block:
 
-- name: "Install systemd unit file for aehostd-ph"
-  template:
-    src: "systemd/aehostd-ph.service.j2"
-    dest: "/etc/systemd/system/aehostd-ph.service"
-    owner: root
-    group: root
-    mode: 0o0644
-  when: ansible_service_mgr == "systemd"
-  notify:
-    - "restart aehostd-ph"
+  - name: "Install systemd unit file for aehostd"
+    template:
+      src: "systemd/aehostd.service.j2"
+      dest: "/etc/systemd/system/aehostd.service"
+      owner: root
+      group: root
+      mode: 0o0644
+    notify:
+      - "restart aehostd"
 
-- name: "Make sure systemd unit files are reloaded"
-  systemd:
-    daemon_reload: yes
+  - name: "Install systemd unit file for aehostd-ph"
+    template:
+      src: "systemd/aehostd-ph.service.j2"
+      dest: "/etc/systemd/system/aehostd-ph.service"
+      owner: root
+      group: root
+      mode: 0o0644
+    notify:
+      - "restart aehostd-ph"
+
+  - name: "Make sure systemd unit files are reloaded"
+    systemd:
+      daemon_reload: yes
+
   when: ansible_service_mgr == "systemd"
 
 - name: "Ensure aehostd services are enabled and running"
