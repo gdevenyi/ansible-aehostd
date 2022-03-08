@@ -98,7 +98,7 @@
 
     when: aehost_result.changed and aehost_result.password
 
-  when: aehostd_setup_admin is defined and aehostd_setup_admin != ""
+  when: aehostd_setup_admin is defined and aehostd_setup_admin and aehostd_setup_adminpw
 
   tags:
     - aedir_init
