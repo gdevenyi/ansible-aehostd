@@ -27,6 +27,7 @@ Environment=PYTHONWARNINGS=default
 ExecStart={{ aehostd_python }} -m aehostd.priv --pid {{ aehostd_pid_file|dirname }}/aehostd-ph.pid --config {{ aehostd_conf_file }}
 Restart=always
 UMask=027
+ReadWritePaths={{ aehostd_sudoers_file|dirname }} /etc/sudoers.d/
 # various hardening options
 CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
 AmbientCapabilities=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
@@ -35,7 +36,7 @@ PrivateDevices=yes
 DevicePolicy=closed
 PrivateNetwork=yes
 IPAddressDeny=any
-ProtectSystem=yes
+ProtectSystem=strict
 ProtectHome=yes
 ProtectKernelModules=yes
 ProtectKernelTunables=yes

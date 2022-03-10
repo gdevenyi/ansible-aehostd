@@ -21,6 +21,7 @@ ExecStart=mv -v {{ aehostd_sudoers_file }} /etc/sudoers.d/{{ aehostd_sudoers_fil
 ExecStart=chown -c root:root /etc/sudoers.d/{{ aehostd_sudoers_file|basename }}
 ExecStart=chmod -c 0440 /etc/sudoers.d/{{ aehostd_sudoers_file|basename }}
 UMask=027
+ReadWritePaths={{ aehostd_sudoers_file|dirname }} /etc/sudoers.d/
 # various hardening options
 CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
 AmbientCapabilities=CAP_DAC_OVERRIDE CAP_FOWNER CAP_CHOWN
@@ -29,7 +30,7 @@ PrivateDevices=yes
 DevicePolicy=closed
 PrivateNetwork=yes
 IPAddressDeny=any
-ProtectSystem=yes
+ProtectSystem=strict
 ProtectHome=yes
 ProtectKernelModules=yes
 ProtectKernelTunables=yes
