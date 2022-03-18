@@ -2,4 +2,21 @@
 # vars file for roles/aehostd
 
 # system-specific limited replacement for @resources
-systemcallfilter_resources: "{{ '@resources' if ansible_lsb.description=='openSUSE Tumbleweed' else 'sched_setparam sched_setscheduler sched_setaffinity setpriority setrlimit set_mempolicy migrate_pages move_pages mbind sched_setattr' }}"
+aehostd_systemcallfilter_block:
+  - "@clock"
+  - "@cpu-emulation"
+  - "@debug"
+  - "@keyring"
+  - "@module"
+  - "@mount"
+  - "@obsolete"
+  - "@pkey"
+  - "@privileged"
+  - "@raw-io"
+  - "@reboot"
+  - "{{ '@resources' if ansible_lsb.description=='openSUSE Tumbleweed' else 'sched_setparam sched_setscheduler sched_setaffinity setpriority setrlimit set_mempolicy migrate_pages move_pages mbind sched_setattr' }}"
+  - "@setuid"
+  - "@swap"
+  - "@timer"
+  - "madvise"
+  - "slice"

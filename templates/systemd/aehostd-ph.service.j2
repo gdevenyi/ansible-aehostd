@@ -55,7 +55,7 @@ MemoryDenyWriteExecute=yes
 PrivateIPC=yes
 RemoveIPC=yes
 SystemCallArchitectures=native
-SystemCallFilter=~ madvise @clock @cpu-emulation @debug @keyring @module @mount @raw-io @reboot @swap @obsolete @timer {{ systemcallfilter_resources }} @privileged @pkey @obsolete @setuid
+SystemCallFilter=~ {{ aehostd_systemcallfilter_block|join(' ') }}
 SystemCallFilter=chown chown32 fchown fchown32 fchownat lchown lchown32
 RestrictAddressFamilies=AF_UNIX
 
