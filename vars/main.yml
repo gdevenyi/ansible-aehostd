@@ -19,4 +19,4 @@ aehostd_systemcallfilter_block:
   - "@swap"
   - "@timer"
   - "madvise"
-  - "slice"
+  - "splice"
