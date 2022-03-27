@@ -16,6 +16,7 @@
   zypper_repository:
     repo: '*'
     runrefresh: yes
+  when: aehostd_refresh_repos
 
 - name: "Install packages"
   zypper:
