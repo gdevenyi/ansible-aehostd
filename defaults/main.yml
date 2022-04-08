@@ -124,8 +124,10 @@ aehostd_gid: "{{ aehostd_uid }}"
 # Python logging level
 aehostd_loglevel: "20"
 
-# Python interpreter
-aehostd_python: "{{ aehostd_os_vars[aehostd_lsb_id].python }} -ROOB -I -bb"
+# Python interpreter and command-line arguments to use
+# meaning of command-line arguments:
+# https://docs.python.org/3/using/cmdline.html#miscellaneous-options
+aehostd_python: "{{ aehostd_os_vars[aehostd_lsb_id].python }} -R -OO -B -I -S -bb"
 
 # Pathnames of aehostd's files and directories
 aehostd_conf_file: "/etc/aehostd.conf"
