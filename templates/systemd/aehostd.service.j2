@@ -11,6 +11,7 @@ Description=NSS/PAM service for AE-DIR
 Documentation=https://ae-dir.com/aehostd.html
 Requires=local-fs.target network.target
 Before=nss-user-lookup.target
+Wants=nss-user-lookup.target
 After=local-fs.target network.target
 
 [Service]
