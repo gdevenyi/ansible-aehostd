@@ -17,13 +17,6 @@ Type=simple
 PIDFile={{ aehostd_pid_file|dirname }}/aehostd-ph.pid
 User=root
 Group=root
-# let Python use random object identifier
-Environment=PYTHONHASHSEED=random
-# full optimization (especially __debug__ = False)
-Environment=PYTHONOPTIMIZE=2
-# avoid to accidentially write Python byte code
-Environment=PYTHONDONTWRITEBYTECODE=1
-Environment=PYTHONWARNINGS=default
 ExecStart={{ aehostd_python }} -m aehostd.priv --pid {{ aehostd_pid_file|dirname }}/aehostd-ph.pid --config {{ aehostd_conf_file }}
 Restart=always
 UMask=027
