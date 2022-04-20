@@ -163,6 +163,7 @@
       name: "aehostd-ph"
       state: stopped
       enabled: no
+    ignore_errors: yes
 
   when: ansible_service_mgr == "systemd"
 
