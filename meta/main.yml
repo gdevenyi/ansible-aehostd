@@ -17,7 +17,8 @@ galaxy_info:
     - 15.3
   - name: Debian
     versions:
-    - buster
+    - bullseye
+    - bookworm
   - name: SLES
     versions:
     - 15SP2
@@ -34,6 +35,10 @@ galaxy_info:
   - name: Rocky
     versions:
     - 8
+  - name: Ubuntu
+    versions:
+    - 20.04
+    - 22.04
 
   galaxy_tags:
     - aedir
