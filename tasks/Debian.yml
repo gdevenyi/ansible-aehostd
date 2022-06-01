@@ -1,9 +1,12 @@
 ---
 
 - name: "Add AE-DIR repository key"
-  apt_key:
-    data: "{{ lookup('file', item.value.key) }}"
-    state: present
+  copy:
+    src: "{{ item.value.key }}"
+    dest: "/etc/apt/trusted.gpg.d/{{ item.value.key }}.asc"
+    owner: root
+    group: root
+    mode: 0o0644
   with_dict: "{{ aehostd_pkg_repos }}"
 
 - name: "Add AE-DIR Debian repository"
