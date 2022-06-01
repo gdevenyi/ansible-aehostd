@@ -2,7 +2,7 @@
 # defaults file for roles/ae-dir-hostd
 
 # minimum version of aehostd to install
-aehostd_min_version: "1.5.10"
+aehostd_min_version: "1.5.11"
 
 # map real LSB id to another LSB id to be used during plays
 aehostd_lsb_id_map:
