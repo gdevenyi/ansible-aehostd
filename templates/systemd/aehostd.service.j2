@@ -52,6 +52,9 @@ RemoveIPC=yes
 SystemCallArchitectures=native
 SystemCallFilter=~ {{ aehostd_systemcallfilter_block|join(' ') }}
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+ProtectProc=invisible
+ProcSubset=pid
+SocketBindDeny=any
 
 {% if aehostd_apparmor_enabled %}
 #AppArmorProfile=aehostd

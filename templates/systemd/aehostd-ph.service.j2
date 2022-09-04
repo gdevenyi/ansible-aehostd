@@ -51,6 +51,9 @@ SystemCallArchitectures=native
 SystemCallFilter=~ {{ aehostd_systemcallfilter_block|join(' ') }}
 SystemCallFilter=chown chown32 fchown fchown32 fchownat lchown lchown32
 RestrictAddressFamilies=AF_UNIX
+ProtectProc=invisible
+ProcSubset=pid
+SocketBindDeny=any
 
 {% if aehostd_apparmor_enabled %}
 #AppArmorProfile=aehostd-ph
