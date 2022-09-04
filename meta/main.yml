@@ -3,7 +3,7 @@ galaxy_info:
   author: Michael Ströder
   description: Linux NSS/PAM integration with AE-DIR via aehostd
 
-  issue_tracker_url: https://ae-dir.com
+  issue_tracker_url: https://code.stroeder.com/AE-DIR/ansible-aehostd/issues
 
   license: Apache-2.0
 
