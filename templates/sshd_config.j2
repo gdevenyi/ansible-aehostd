@@ -82,6 +82,9 @@ AcceptEnv LANG LC_*
 Subsystem sftp {{ aehostd_sshd_sftp_server }}
 {% endif %}
 
+# grant login access only to some groups
+#AllowGroups root ae-vgrp-role-login
+
 #---------------------------------------------------------------------------
 # specific subconfigurations limited by Match directive
 #---------------------------------------------------------------------------
