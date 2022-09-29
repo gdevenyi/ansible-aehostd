@@ -18,5 +18,4 @@ aehostd_systemcallfilter_block:
   - "@setuid"
   - "@swap"
   - "@timer"
-  - "madvise"
   - "splice"
